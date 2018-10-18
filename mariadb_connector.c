@@ -7,7 +7,7 @@ int mariadb_execute_select(lua_State *L){
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 	MYSQL_FIELD *field_names;
-	int n_fields,n_rows,i,index;
+	int n_fields,n_rows,i,index,counter;
 	conn=mysql_init(NULL);
 	if(!mysql_real_connect(conn,HOST,USER,PASS,DATABASE,PORT,SOCKET,OPTIONS)){
 		return 0;
@@ -22,10 +22,11 @@ int mariadb_execute_select(lua_State *L){
 	n_rows=mysql_num_rows(res);
 	n_fields=mysql_num_fields(res);
 	field_names=mysql_fetch_fields(res);
-	
+	counter=0;
 	lua_createtable(L, n_rows, n_rows);
 	putchar('|');
 	while(row=mysql_fetch_row(res)){
+		lua_pushnumber(L,++counter);
 		lua_createtable(L,0,n_fields);
 		for(i=0;i<n_fields;++i){
 			putchar('.');
@@ -33,7 +34,7 @@ int mariadb_execute_select(lua_State *L){
 			lua_pushstring(L,row[i]);
 			lua_settable(L,-3);
 		}
-		lua_settable(L,-2);
+		lua_settable(L,-3);
 	}
 	mysql_free_result(res);
 	mysql_close(conn);
