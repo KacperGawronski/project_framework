@@ -27,9 +27,9 @@ int mariadb_execute_select(lua_State *L){
 		lua_createtable(L,n_fields,n_fields);
 		for(i=0;i<n_fields;++i){
 			lua_pushstring(L,row[i]);
-			lua_setfield(L,-2,NULL);
+			lua_setfield(L,-2,"");
 		}
-		lua_setfield(L,-2,NULL);
+		lua_setfield(L,-2,"");
 	}
 	mysql_free_result(res);
 	mysql_close(conn);
