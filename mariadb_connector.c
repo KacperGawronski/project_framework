@@ -6,7 +6,7 @@ int mariadb_execute_select(lua_State *L){
 	MYSQL *conn;
 	MYSQL_RES *res;
 	MYSQL_ROW row;
-	MYSQL_FIELD *field_names
+	MYSQL_FIELD *field_names;
 	int n_fields,n_rows,i;
 	conn=mysql_init(NULL);
 	if(!mysql_real_connect(conn,HOST,USER,PASS,DATABASE,PORT,SOCKET,OPTIONS)){
@@ -27,7 +27,7 @@ int mariadb_execute_select(lua_State *L){
 	while(row=mysql_fetch_row(res)){
 		lua_createtable(L,0,n_fields);
 		for(i=0;i<n_fields;++i){
-			lua_pushstring(L,field_names[i]);
+			lua_pushstring(L,field_names[i]->name);
 			lua_pushstring(L,row[i]);
 			lua_settable(L,-3);
 		}
