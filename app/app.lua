@@ -43,7 +43,7 @@ function process_request(http_request)
 				local s,n=string.gsub("/api.json%?(.+)")
 				if n>0 then
 					local tmp=mariadb_execute_select("SELECT * FROM employees LIMIT 10")
-					coroutine.yield(json:encode(tmp))
+					print(json:encode(tmp))
 				else
 					s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
 					if n>0 then coroutine.yield(get_js_file(s))
