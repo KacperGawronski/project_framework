@@ -21,7 +21,7 @@ dofile("app/menu.lua")
 dofile("app/head.lua")
 dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
-json=dofile("JSON.lua")
+json=require("JSON.lua")
 
 function process_request(http_request)
 	local main=  function ()
