@@ -36,12 +36,17 @@ function process_request(http_request)
 				coroutine.yield("</div><div id=\"main\">")
 				coroutine.yield(generate_index())
 				
-				local tmp=mariadb_execute_select()
+				local tmp=mariadb_execute_select("SELECT * FROM employees ")
+				coroutine.yield("<table>")
 				for _,i in ipairs(tmp) do
+					coroutine.yield("<tr>")
 					for _,j in ipairs(i)do
-						coroutine.yield(j)
+						coroutine.yield("<td>"..j.."</td>")
 					end
+					coroutine.yield("<tr>")
 				end
+				coroutine.yield("</table>")
+				
 				
 				coroutine.yield("</div>")
 				coroutine.yield("</body></html>")
