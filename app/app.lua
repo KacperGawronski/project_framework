@@ -21,6 +21,7 @@ dofile("app/menu.lua")
 dofile("app/head.lua")
 dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
+json=require("cjson")
 
 function process_request(http_request)
 	local main=  function ()
@@ -36,24 +37,13 @@ function process_request(http_request)
 				coroutine.yield("</div><div id=\"main\">")
 				coroutine.yield(generate_index())
 				
-				local tmp=mariadb_execute_select("SELECT * FROM employees LIMIT 10;")
-				coroutine.yield("<table>")
-				for _,i in ipairs(tmp) do
-					coroutine.yield("<tr>")
-					for _,j in pairs(i)do
-						coroutine.yield("<td>"..j.."</td>")
-					end
-					coroutine.yield("<tr>")
-				end
-				coroutine.yield("</table>")
-				
-				
 				coroutine.yield("</div>")
 				coroutine.yield("</body></html>")
 			else
 				local s,n=string.gsub("/api.json%?(.+)")
 				if n>0 then
-				
+					local tmp=mariadb_execute_select("SELECT * FROM employees LIMIT 10;")
+					coroutine.yield(json.encode(tmp))
 				else
 					s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
 					if n>0 then coroutine.yield(get_js_file(s))
