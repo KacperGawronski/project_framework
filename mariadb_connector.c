@@ -32,7 +32,7 @@ int mariadb_execute_select(lua_State *L){
 			putchar('.');
 			lua_pushstring(L,field_names[i].name);
 			lua_pushstring(L,row[i]);
-			printf("%s\n",lua_tostring(L,-1));
+			printf("%s: %s\n",lua_tostring(L,-2),lua_tostring(L,-1));
 			lua_settable(L,-3);
 		}
 		lua_settable(L,-3);
