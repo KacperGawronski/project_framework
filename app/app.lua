@@ -35,6 +35,10 @@ function process_request(http_request)
 				coroutine.yield(generate_menu())
 				coroutine.yield("</div><div id=\"main\">")
 				coroutine.yield(generate_index())
+				
+				local tmp=mariadb_execute_select()
+				print(tmp[0][0])
+				
 				coroutine.yield("</div>")
 				coroutine.yield("</body></html>")
 			else
