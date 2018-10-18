@@ -21,14 +21,14 @@ int mariadb_execute_select(lua_State *L){
 	n_rows=mysql_num_rows(res);
 	n_fields=mysql_num_fields(res);
 	
-	lua_createtable(L, n_rows, n_rows);
+	lua_createtable(L, 0, n_rows);
 	while(row=mysql_fetch_row(res)){
-		lua_createtable(L,n_fields,n_fields);
+		lua_createtable(L,0,n_fields);
 		for(i=0;i<n_fields;++i){
 			lua_pushstring(L,row[i]);
-			lua_setfield(L,-2,"");
+			lua_setfield(L,-2,NULL);
 		}
-		lua_setfield(L,-2,"");
+		lua_setfield(L,-2,NULL);
 	}
 	mysql_free_result(res);
 	mysql_close(conn);
