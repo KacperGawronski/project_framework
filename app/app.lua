@@ -38,9 +38,9 @@ function process_request(http_request)
 				
 				local tmp=mariadb_execute_select("SELECT * FROM employees LIMITS 10")
 				coroutine.yield("<table>")
-				for _,i in ipairs(tmp) do
+				for _,i in pairs(tmp) do
 					coroutine.yield("<tr>")
-					for _,j in ipairs(i)do
+					for _,j in pairs(i)do
 						coroutine.yield("<td>"..j.."</td>")
 					end
 					coroutine.yield("<tr>")
