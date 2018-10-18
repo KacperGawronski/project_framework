@@ -33,7 +33,7 @@ int mariadb_execute_select(lua_State *L){
 			lua_pushstring(L,row[i]);
 			lua_settable(L,-3);
 		}
-		lua_settable(L,-2,NULL);
+		lua_settable(L,-2);
 	}
 	mysql_free_result(res);
 	mysql_close(conn);
