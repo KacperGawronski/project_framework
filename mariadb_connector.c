@@ -22,17 +22,13 @@ int mariadb_execute_select(lua_State *L){
 	n_fields=mysql_num_fields(res);
 	
 	lua_createtable(L, n_rows, n_rows);
-	printf("works till now \n");
 	while(row=mysql_fetch_row(res)){
-		printf("works till now2 \n");
 		lua_createtable(L,n_fields,n_fields);
 		for(i=0;i<n_fields;++i){
-			printf("works till now3 \n");
 			lua_pushstring(L,row[i]);
 			lua_setfield(L,-2,"");
 		}
 		lua_setfield(L,-2,"");
-		printf("works till now4 \n");
 	}
 	mysql_free_result(res);
 	mysql_close(conn);
