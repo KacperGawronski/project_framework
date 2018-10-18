@@ -23,7 +23,7 @@ int mariadb_execute_select(lua_State *L){
 	n_fields=mysql_num_fields(res);
 	field_names=mysql_fetch_fields(res);
 	
-	lua_createtable(L, 0, n_rows);
+	lua_createtable(L, n_rows, n_rows);
 	putchar('|');
 	while(row=mysql_fetch_row(res)){
 		lua_createtable(L,0,n_fields);
