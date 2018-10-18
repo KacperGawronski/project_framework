@@ -37,7 +37,11 @@ function process_request(http_request)
 				coroutine.yield(generate_index())
 				
 				local tmp=mariadb_execute_select()
-				print(tmp[0][0])
+				for _,i in ipairs(tmp) do
+					for _,j in ipairs(i)do
+						coroutine.yield(j)
+					end
+				end
 				
 				coroutine.yield("</div>")
 				coroutine.yield("</body></html>")
