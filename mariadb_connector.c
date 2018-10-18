@@ -24,9 +24,9 @@ int mariadb_execute_select(lua_State *L){
 	field_names=mysql_fetch_fields(res);
 	
 	lua_createtable(L, 0, n_rows);
-	lua_pushnil(L);
 	putchar('|');
 	while(row=mysql_fetch_row(res)){
+		lua_pushnil(L);
 		lua_createtable(L,0,n_fields);
 		for(i=0;i<n_fields;++i){
 			putchar('.');
