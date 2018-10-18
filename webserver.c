@@ -32,6 +32,7 @@ https://www.gnu.org/licenses/
 #include <lua5.3/lualib.h>
 #include <lua5.3/lauxlib.h>
 
+#include "mariadb_connector.h"
 
 static int s;
 
@@ -76,6 +77,10 @@ int main(void){
 		/*STARTING Lua interpreter*/
 		tmp->Lua_interpreter=luaL_newstate();
 		luaL_openlibs(tmp->Lua_interpreter);
+		
+		/*initializing database connection function*/
+		lua_pushcfunction(tmp->Lua_interpreter,mariadb_execute_select);
+		lua_setglobal(tmp->Lua_interpreter,"mariadb_execute_select");
 		
 		/*loading app*/
 		tmp_s=luaL_dofile(tmp->Lua_interpreter,"app/app.lua");
