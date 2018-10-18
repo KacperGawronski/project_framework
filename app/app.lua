@@ -21,7 +21,7 @@ dofile("app/menu.lua")
 dofile("app/head.lua")
 dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
-json=require("cjson")
+json=require("5.2/cjson")
 
 function process_request(http_request)
 	local main=  function ()
