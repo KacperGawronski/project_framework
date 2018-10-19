@@ -70,7 +70,9 @@ int main(void){
 
 	for(s=0;s<MAX_THREADS_NUMBER;++s){
 		tmp=malloc(sizeof(*tmp));
-		tmp->s=0;
+		tmp->s=0;		
+		stack_push(tmp);
+	
 	}
 
 
