@@ -41,6 +41,11 @@ function process_request(http_request)
 				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
 				print(s)
 				if n>0 then
+					t={}
+					for k,v in s:gmatch("(%w)=(%w)") do
+						print(k,v)
+						t[k]=v
+					end
 					local tmp=mariadb_execute_select("SELECT * FROM employees LIMIT 10")
 					coroutine.yield(tmp)
 				else
