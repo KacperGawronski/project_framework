@@ -41,7 +41,7 @@ function process_request(http_request)
 				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
 				if n>0 then
 					local t={}
-					string.gsub(s,".*(w-)=(w-).*",function(a,b) print(a) print(b) end)
+					string.gsub(s,".*(w-)=(w-).*", t)
 					for k,v in pairs(t) do
 						print(k.."|"..v)
 					end
