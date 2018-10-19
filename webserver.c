@@ -27,8 +27,8 @@ https://www.gnu.org/licenses/
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "stack.h"
-#include "worker.h"
+#include "worker/stack.h"
+#include "worker/worker.h"
 #include <signal.h>
 
 #include <lua5.3/lua.h>
