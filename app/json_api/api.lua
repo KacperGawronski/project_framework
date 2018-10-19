@@ -3,7 +3,7 @@ function SELECT(s)
 	local t={}
 	local limit=30
 	local data_table="employees"
-	s=s:gsub(,"'","''"):gsub("%3E",">"):gsub("%3C","<")
+	s=string.gsub(string.gsub(string.gsub(s,"'","''"),"%3E",">"),"%3C","<")
 	print(s)
 	for k,sign,v in s:gmatch("([%w_,]+)([<=>]+)([%w_,]+)") do
 		if k=="limit" then
