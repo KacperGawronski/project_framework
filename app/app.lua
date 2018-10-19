@@ -41,7 +41,7 @@ function process_request(http_request)
 				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
 				if n>0 then
 					local t={}
-					for local k,v in string.gmatch(s,"(w+)=(w+)")
+					for local k,v in string.gmatch(s,"(%w+)=(%w+)")
 						t[k]=v
 					for local k,v in pairs(t) do
 						print(k.."|"..v)
