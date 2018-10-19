@@ -49,6 +49,7 @@ function process_request(http_request)
 							coroutine.yield(generate_index())
 							coroutine.yield("</div>")
 							coroutine.yield("</body></html>")
+						end
 					end
 				end
 			end
