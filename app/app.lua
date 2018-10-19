@@ -27,7 +27,7 @@ function process_request(http_request)
 	local main=  function ()
 		local GET_value,n=string.gsub(http_request,"GET (.-) HTTP/1%.1.*","%1")
 		if n> 0 then
-			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: keep-alive\r\n\r\n")
+			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n")
 			if GET_value=="/" then
 				coroutine.yield("<html>")
 				coroutine.yield(generate_head())
