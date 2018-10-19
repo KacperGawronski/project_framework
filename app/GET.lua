@@ -39,18 +39,18 @@ function process_request(http_request)
 					s,n=string.gsub(GET_value,"/(.+)%.css","app/css/%1.css")
 					if n>0 then coroutine.yield(get_css_file(s))
 					else
-						s,n=string.gsub(GET_value,"/page?(.+)")
+						s,n=string.gsub(GET_value,"/page%?(.+)")
 						if n>0 then
 							local f=dofile("app/pages/"..s..".lua")
-							for s in f do
+							if f then for s in f do
 								coroutine.yield(s)
-							end
+							end end
 						else
 							if GET_value=="/" then
 								local f=dofile("app/pages/index.lua")
-								for s in f do
+								if f then for s in f do
 									coroutine.yield(s)
-								end
+								end end
 							end
 						end
 					end
