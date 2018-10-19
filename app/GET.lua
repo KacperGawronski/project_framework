@@ -48,7 +48,7 @@ function process_request(http_request)
 		if n>0 then
 			coroutine.yield(request_OK)
 			dofile("app/json_api/api.lua")
-			local tmp=mariadb_execute_select(SELECT(s))
+			--local tmp=mariadb_execute_select(SELECT(s))
 			if tmp then coroutine.yield(tmp) end
 		end
 	end
@@ -79,7 +79,7 @@ function process_request(http_request)
 			coroutine.yield(s)
 		end end	
 	end
-	options.f["/"]=coroutine.wrap(function () options.g["/" end)
+	options.f["/"]=coroutine.wrap(function () options.g["/"]() end)
 	
 	options.mt={}
 	options.mt.__index=function (t,v)
@@ -90,7 +90,7 @@ function process_request(http_request)
 		end
 		local v=v:gsub("/(.*)%??.*","%1")
 		print(v)
-		if not v then v="/"
+		if not v then v="/" end
 		return options.g[v]
 	end
 	setmetatable(options,options.mt)
