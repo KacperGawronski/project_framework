@@ -53,6 +53,7 @@ int mariadb_execute_select(lua_State *L){
 		json_array_append(main_array,json_row);
 	}
 	s=json_dumps(main_array,0);
+	printf("%s",s);
 	lua_pushstring(L,s);
 	mysql_free_result(res);
 	mysql_close(conn);
