@@ -1,4 +1,4 @@
-CFLAGS=-pthread -llua5.3 -lmariadb -ljasson
+CFLAGS=-pthread -llua5.3 -lmariadb -ljansson
 OBJS=$(shell find ./ -name "*.c"|sed 's/.cpp/.o/g'|sed 's/^\.\///g')
 all: webserver
 webserver: $(OBJS)
