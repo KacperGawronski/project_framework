@@ -3,6 +3,7 @@ function SELECT(s)
 	local t={}
 	local limit=30
 	local data_table="employees"
+	print(s)
 	for k,sign,v in s:gmatch("([%w_,]+)([<=>]+)([%w_,]+)") do
 		if k=="limit" then
 			local tmp
