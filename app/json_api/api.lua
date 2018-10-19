@@ -20,7 +20,7 @@ function SELECT(s)
 		if fields=="*" then fields=k else fields=fields..k end
 	end
 
-	SELECT = string.format("SELECT %s FROM %s WHERE TRUE ",fields,data_table)
+	local SELECT = string.format("SELECT %s FROM %s WHERE TRUE ",fields,data_table)
 	
 	for k,v in pairs(t) do
 		SELECT=SELECT.."AND "..k.."='"..v.."' "
