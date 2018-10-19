@@ -39,14 +39,9 @@ function process_request(http_request)
 				coroutine.yield("</body></html>")
 			else
 				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
-				print(s)
 				if n>0 then
-					t={}
-					for k,v in s:gmatch("(%w+)=(%w+)") do
-						print(k,v)
-						t[k]=v
-					end
-					local tmp=mariadb_execute_select("SELECT * FROM employees LIMIT 10")
+					local SELECT=dofile("app/json_api/api.lua")
+					local tmp=mariadb_execute_select(SELECT(s))
 					coroutine.yield(tmp)
 				else
 					s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
