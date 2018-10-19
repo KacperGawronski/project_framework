@@ -36,11 +36,12 @@ https://www.gnu.org/licenses/
 void *worker(void *arg){
 	extern sem_t counter_sem;
 	char buffer[HTTP_REQUEST_SIZE];
-	
-	memset(buffer,HTTP_REQUEST_SIZE,sizeof(char))
-	const char *response;
-	buffer[HTTP_REQUEST_SIZE-1]='\0';
 	int n,i;
+	
+	const char *response;
+	
+	memset(buffer,HTTP_REQUEST_SIZE,sizeof(char));
+	buffer[HTTP_REQUEST_SIZE-1]='\0';
 	n=recv(((struct stack_element *)arg)->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
 		if(!strncmp(buffer,"GET",3)){
 			
