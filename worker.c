@@ -39,15 +39,16 @@ void *worker(void *arg){
 	const char *response;
 	buffer[HTTP_REQUEST_SIZE-1]='\0';
 	int n,i;
-	
+	lua_CFunction current_function;
 	n=recv(((struct stack_element *)arg)->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
 		if(!strncmp(buffer,"GET",3)){
 			
 			lua_getglobal(((struct stack_element *)arg)->Lua_interpreter,"process_request");
 			lua_pushstring(((struct stack_element *)arg)->Lua_interpreter,buffer);
 			lua_call(((struct stack_element *)arg)->Lua_interpreter,1,1);
-				
-			while((!lua_isnil(((struct stack_element *)arg)->Lua_interpreter,-1))&&LUA_YIELD==lua_resume(((struct stack_element *)arg)->Lua_interpreter,NULL,0)){
+			current_function=lua_tocfunction(((struct stack_element *)arg)->Lua_interpreter,-1);
+			
+			while(current_function(((struct stack_element *)arg)->Lua_interpreter)){
 				response=lua_tostring(((struct stack_element *)arg)->Lua_interpreter,-1);
 				send(((struct stack_element *)arg)->s,response,strlen(response),MSG_DONTWAIT);
 				lua_pop(((struct stack_element *)arg)->Lua_interpreter,1);
