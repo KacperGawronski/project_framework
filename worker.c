@@ -42,7 +42,7 @@ void *worker(void *arg){
 	
 	memset(buffer,HTTP_REQUEST_SIZE,sizeof(char));
 	buffer[HTTP_REQUEST_SIZE-1]='\0';
-	n=recv(((struct stack_element *)arg)->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
+	while((n=recv(((struct stack_element *)arg)->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT))>0)
 		if(!strncmp(buffer,"GET",3)){
 			
 			lua_getglobal(((struct stack_element *)arg)->Lua_interpreter,"process_request");
