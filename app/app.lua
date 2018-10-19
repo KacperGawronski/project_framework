@@ -16,9 +16,6 @@ https://www.gnu.org/licenses/
 --]]
 
 
-dofile("app/index.lua")
-dofile("app/menu.lua")
-dofile("app/head.lua")
 dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
 
@@ -28,6 +25,9 @@ function process_request(http_request)
 		if n>0 then
 			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n")
 			if GET_value=="/" then
+				dofile("app/index.lua")
+				dofile("app/menu.lua")
+				dofile("app/head.lua")
 				coroutine.yield("<html>")
 				coroutine.yield(generate_head())
 				coroutine.yield("<body><h1 id=\"header\">Example project</h1>")
@@ -40,8 +40,12 @@ function process_request(http_request)
 			else
 				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
 				if n>0 then
+					local t={}
+					string.gsub(s,"(.-)=(.-)",function(a b) t[a]=b end)
+					for k,v in pairs(t) do
+						print(k,v)
+					end
 					local tmp=mariadb_execute_select("SELECT * FROM employees LIMIT 10")
-					print(tmp)
 					coroutine.yield(tmp)
 				else
 					s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
