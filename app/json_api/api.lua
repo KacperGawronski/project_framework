@@ -1,6 +1,5 @@
 
 function SELECT(s)
-	s=string.gsub(s,".*(').*","''")
 	local t={}
 	local limit=30
 	local data_table="employee"
@@ -26,6 +25,7 @@ function SELECT(s)
 	for k,v in pairs(t) do
 		SELECT=SELECT.."AND "..k.."='"..v.."' "
 	end
-	return SELECT..string.format("LIMIT %d;",limit)
+	SELECT=SELECT..string.format("LIMIT %d;",limit)
+	return SELECT
 	
 end
