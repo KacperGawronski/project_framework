@@ -1,5 +1,5 @@
 
-return function(s)
+function SELECT(s)
 	s=gsub(s,"'","''")
 	local t={}
 	local limit=30
