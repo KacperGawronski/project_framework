@@ -57,7 +57,6 @@ int mariadb_execute_select(lua_State *L){
 	lua_pushstring(L,s);
 	mysql_free_result(res);
 	mysql_close(conn);
-	free(s);
 	return 1;
 }
 
