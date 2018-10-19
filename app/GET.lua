@@ -27,7 +27,7 @@ function process_request(http_request)
 	local GET_value,n=string.gsub(http_request,"GET (.+) HTTP/1%.1.*","%1")
 	local request_OK="HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n"
 	local mt={}
-	options={}
+	local options={}
 	options.f={}
 	options.g={}
 	
@@ -89,7 +89,7 @@ function process_request(http_request)
 		end
 		local v=v:gsub("/(.*)%??.*","%1")
 		if not v then v="/"
-		return options.f[v]
+		return options.g[v]
 	end
 	setmetatable(options,options.mt)
 
