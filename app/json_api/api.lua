@@ -25,7 +25,7 @@ function SELECT(s)
 	for k,v in pairs(t) do
 		SELECT=SELECT.."AND "..k.."='"..v.."' "
 	end
-	SELECT=SELECT..string.format("LIMIT %d;",limit)
+	SELECT=SELECT..string.format("LIMIT %d",limit)
 	return SELECT
 	
 end
