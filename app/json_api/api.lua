@@ -14,7 +14,6 @@ function SELECT(s)
 			t[k]=v
 		end
 	end
-	print(limit,data_table)
 	local fields="*"
 	for k,v in pairs(t) do
 		if fields=="*" then fields=k else fields=fields..k end
