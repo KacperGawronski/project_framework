@@ -48,7 +48,7 @@ void *worker(void *arg){
 			lua_call(((struct stack_element *)arg)->Lua_interpreter,1,1);
 			current_function=lua_tocfunction(((struct stack_element *)arg)->Lua_interpreter,-1);
 			
-			while(current_function(((struct stack_element *)arg)->Lua_interpreter)){
+			while(2==current_function(((struct stack_element *)arg)->Lua_interpreter)){
 				response=lua_tostring(((struct stack_element *)arg)->Lua_interpreter,-1);
 				send(((struct stack_element *)arg)->s,response,strlen(response),MSG_DONTWAIT);
 				lua_pop(((struct stack_element *)arg)->Lua_interpreter,1);
