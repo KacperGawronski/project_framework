@@ -1,7 +1,7 @@
 
 function SELECT(s)
 	local t={}
-	local limit=30
+	local limit=1000
 	local data_table="employees"
 	local fields="*"
 	s=string.gsub(s,"'","''"):gsub("%%3E",">"):gsub("%%3C","<")
@@ -9,7 +9,7 @@ function SELECT(s)
 		if k=="limit" then
 			local tmp
 			tmp=tonumber(v)
-			if tmp<30 then limit=tmp else limit=30 end
+			if tmp<1000 then limit=tmp else limit=1000 end
 		elseif k=="data_table" then
 			data_table=v
 		elseif k=="fields" then
