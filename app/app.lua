@@ -42,9 +42,7 @@ function process_request(http_request)
 				if n>0 then
 					dofile("app/json_api/api.lua")
 					print("File loaded")
-					--str=SELECT(s)
-					print(s)
-					local tmp=mariadb_execute_select("SELECT * FROM employees")
+					local tmp=mariadb_execute_select(SELECT(s))
 					coroutine.yield(tmp)
 				else
 					s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
