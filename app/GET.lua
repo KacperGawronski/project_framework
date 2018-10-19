@@ -28,7 +28,6 @@ function process_request(http_request)
 	local request_OK="HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n"
 	local mt={}
 	local options={}
-	options.f={}
 	options.g={}
 	
 	options.g.page= function()
@@ -41,7 +40,6 @@ function process_request(http_request)
 			end end
 		end
 	end
-	options.f.page=coroutine.wrap(function () options.g.page() end)
 	
 	options.g["api.json"]=function()	
 		local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
@@ -52,7 +50,6 @@ function process_request(http_request)
 			if tmp then coroutine.yield(tmp) end
 		end
 	end
-	options.f["api.json"]=coroutine.wrap(function () options.g["api.json"]() end)
 	
 	options.g["js"]=function ()
 		local s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
@@ -61,7 +58,6 @@ function process_request(http_request)
 			coroutine.yield(get_js_file(s))
 		end
 	end
-	options.f["js"]=coroutine.wrap(function () options.g["js"]() end)
 	
 	
 	options.g["css"]=function ()
@@ -71,15 +67,14 @@ function process_request(http_request)
 			coroutine.yield(get_css_file(s))
 		end
 	end
-	options.f["css"]=coroutine.wrap(function () options.g["css"]() end)
-	
+
 	options.g["/"]=function ()
 		local f=dofile("app/pages/index.lua")
+		coroutine.yield(request_OK)
 		if f then for s in f do
 			coroutine.yield(s)
 		end end	
 	end
-	options.f["/"]=coroutine.wrap(function () options.g["/"]() end)
 	
 	options.mt={}
 	options.mt.__index=function (t,v)
@@ -87,7 +82,7 @@ function process_request(http_request)
 		if n>0 and (filetype=="css" or filetype=="js") then
 			return options[filetype]
 		end
-		local v=v:gsub("/(.*)%?","%1")
+		local v=v:gsub("/(.*)%?.*","%1")
 		if not v then v="/" end
 		return options.g[v]
 	end
