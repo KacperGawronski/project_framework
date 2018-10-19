@@ -24,31 +24,31 @@ function process_request(http_request)
 		local GET_value,n=string.gsub(http_request,"GET (.+) HTTP/1%.1.*","%1")
 		if n>0 then
 			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n")
-			if GET_value=="/" then
-				dofile("app/index.lua")
-				dofile("app/menu.lua")
-				dofile("app/head.lua")
-				coroutine.yield("<html>")
-				coroutine.yield(generate_head())
-				coroutine.yield("<body><h1 id=\"header\">Example project</h1>")
-				coroutine.yield("<div id=\"menu\">")
-				coroutine.yield(generate_menu())
-				coroutine.yield("</div><div id=\"main\">")
-				coroutine.yield(generate_index())
-				coroutine.yield("</div>")
-				coroutine.yield("</body></html>")
+			local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
+			if n>0 then
+				dofile("app/json_api/api.lua")
+				local tmp=mariadb_execute_select(SELECT(s))
+				if tmp then coroutine.yield(tmp) end
 			else
-				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
-				if n>0 then
-					dofile("app/json_api/api.lua")
-					local tmp=mariadb_execute_select(SELECT(s))
-					if tmp then coroutine.yield(tmp) end
+				s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
+				if n>0 then coroutine.yield(get_js_file(s))
 				else
-					s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
-					if n>0 then coroutine.yield(get_js_file(s))
+					s,n=string.gsub(GET_value,"/(.+)%.css","app/css/%1.css")
+					if n>0 then coroutine.yield(get_css_file(s))
 					else
-						s,n=string.gsub(GET_value,"/(.+)%.css","app/css/%1.css")
-						if n>0 then coroutine.yield(get_css_file(s)) end
+						if GET_value=="/" then
+							dofile("app/index.lua")
+							dofile("app/menu.lua")
+							dofile("app/head.lua")
+							coroutine.yield("<html>")
+							coroutine.yield(generate_head())
+							coroutine.yield("<body><h1 id=\"header\">Example project</h1>")
+							coroutine.yield("<div id=\"menu\">")
+							coroutine.yield(generate_menu())
+							coroutine.yield("</div><div id=\"main\">")
+							coroutine.yield(generate_index())
+							coroutine.yield("</div>")
+							coroutine.yield("</body></html>")
 					end
 				end
 			end
