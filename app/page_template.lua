@@ -19,7 +19,6 @@ https://www.gnu.org/licenses/
 --]]
 
 
-dofile("app/menu.lua")
 dofile("app/head.lua")
 local function f(t)
 
