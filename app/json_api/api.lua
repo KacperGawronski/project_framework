@@ -3,7 +3,7 @@ function SELECT(s)
 	local t={}
 	local limit=30
 	local data_table="employees"
-	for k,v in s:gmatch("(%w+)=(%w+)") do
+	for k,sign,v in s:gmatch("(%w+)([<=>][<=>]*)(%w+)") do
 		if k=="limit" then
 			local tmp
 			tmp=tonumber(v)
@@ -11,7 +11,7 @@ function SELECT(s)
 		elseif k=="data_table" then
 			data_table=v
 		else
-			t[k]=v
+			t[k]={sign,v}
 		end
 	end
 	local fields="*"
@@ -22,7 +22,7 @@ function SELECT(s)
 	local SELECT = string.format("SELECT %s FROM %s WHERE TRUE ",fields,data_table)
 	
 	for k,v in pairs(t) do
-		SELECT=SELECT.."AND "..k.."='"..v.."' "
+		SELECT=SELECT.."AND "..k..v[1].."'"..v[2].."' "
 	end
 	SELECT=SELECT..string.format("LIMIT %d",limit)
 	return SELECT
