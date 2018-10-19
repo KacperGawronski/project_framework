@@ -41,9 +41,9 @@ function process_request(http_request)
 				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
 				if n>0 then
 					local t={}
-					for local k,v in string.gmatch(s,"(%w+)=(%w+)")
+					for k,v in string.gmatch(s,"(%w+)=(%w+)")
 						t[k]=v
-					for local k,v in pairs(t) do
+					for k,v in pairs(t) do
 						print(k.."|"..v)
 					end
 					local tmp=mariadb_execute_select("SELECT * FROM employees LIMIT 10")
