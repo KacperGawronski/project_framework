@@ -23,6 +23,7 @@ dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
 
 function process_request(http_request)
+	
 	local main=  function ()
 		local GET_value,n=string.gsub(http_request,"GET (.-) HTTP/1%.1.*","%1")
 		if n> 0 then
@@ -35,9 +36,7 @@ function process_request(http_request)
 				coroutine.yield(generate_menu())
 				coroutine.yield("</div><div id=\"main\">")
 				coroutine.yield(generate_index())
-				
 				coroutine.yield("</div>")
-				
 				coroutine.yield("</body></html>")
 			else
 				local s,n=string.gsub("/api.json%?(.+)")
