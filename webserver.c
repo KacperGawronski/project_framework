@@ -40,7 +40,6 @@ void SIG_handler(int sig){
 	struct stack_element *tmp1,*tmp2;
 	tmp2=stack_pop();
 	while(tmp1=tmp2){
-		lua_close(tmp1->Lua_interpreter);
 		tmp2=stack_pop();
 		free(tmp1);
 	}
