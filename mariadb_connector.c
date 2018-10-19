@@ -24,12 +24,10 @@ int mariadb_execute_select(lua_State *L){
 	lua_pop(L,1);
 	res=mysql_use_result(conn);
 	if(res==NULL)return 0;
-	printf("Checkpoint 1\n");
 	n_rows=mysql_num_rows(res);
 	n_fields=mysql_num_fields(res);
 	field_names=mysql_fetch_fields(res);
 	if(field_names==NULL)return 0;
-	printf("Checkpoint 2\n");
 	/*lua_createtable(L, n_rows, n_rows);
 	
 	while(row=mysql_fetch_row(res)){

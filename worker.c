@@ -51,14 +51,13 @@ void *worker(void *arg){
 		lua_setglobal(L,"mariadb_execute_select");
 		lua_pushnil(L);
 		/*loading app*/
-		tmp_s=luaL_dofile(L,"app/app.lua");
+		tmp_s=luaL_dofile(L,"app/GET.lua");
 		if(tmp_s){perror("Error loading script:");}
 
 	memset(buffer,HTTP_REQUEST_SIZE,sizeof(char));
 	buffer[HTTP_REQUEST_SIZE-1]='\0';
 	n=recv(((struct stack_element *)arg)->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
 		if(n>3&&!strncmp(buffer,"GET",3)){
-			
 			lua_getglobal(L,"process_request");
 			lua_pushstring(L,buffer);
 			lua_call(L,1,1);
