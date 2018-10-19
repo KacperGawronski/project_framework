@@ -1,8 +1,6 @@
 
 return function(s)
-	local function sqlize(str)
-		return str:gsub("'","''")
-	end
+	s=gsub(s,"'","''")
 	local t={}
 	local limit=30
 	local data_table="employee"
