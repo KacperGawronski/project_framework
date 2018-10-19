@@ -83,11 +83,13 @@ function process_request(http_request)
 	
 	options.mt={}
 	options.mt.__index=function (t,v)
+		print(v)
 		local filetype,n=string.gsub(v,".*%.(%w+).*","%1")
 		if n>0 and (filetype=="css" or filetype=="js") then
 			return options[filetype]
 		end
 		local v=v:gsub("/(.*)%??.*","%1")
+		print(v)
 		if not v then v="/"
 		return options.g[v]
 	end
