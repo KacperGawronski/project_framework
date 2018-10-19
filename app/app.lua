@@ -42,7 +42,9 @@ function process_request(http_request)
 				if n>0 then
 					dofile("app/json_api/api.lua")
 					print("File loaded")
-					coroutine.yield(mariadb_execute_select(SELECT(s)))
+					s=SELECT(s)
+					local tmp=mariadb_execute_select(s)
+					if tmp then coroutine.yield(tmp) end
 				else
 					s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
 					if n>0 then coroutine.yield(get_js_file(s))
