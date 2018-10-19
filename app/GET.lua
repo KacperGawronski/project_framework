@@ -93,7 +93,7 @@ function process_request(http_request)
 	end
 	setmetatable(options,options.mt)
 
-	return(options[GET_VALUE])
+	return(options[GET_value])
 
 end
 
