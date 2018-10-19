@@ -41,7 +41,9 @@ function process_request(http_request)
 				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
 				if n>0 then
 					local SELECT=dofile("app/json_api/api.lua")
-					local tmp=mariadb_execute_select(SELECT(s))
+					str=SELECT(s)
+					print(str)
+					local tmp=mariadb_execute_select(str)
 					coroutine.yield(tmp)
 				else
 					s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
