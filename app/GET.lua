@@ -48,7 +48,7 @@ function process_request(http_request)
 		if n>0 then
 			coroutine.yield(request_OK)
 			dofile("app/json_api/api.lua")
-			--local tmp=mariadb_execute_select(SELECT(s))
+			local tmp=mariadb_execute_select(SELECT(s))
 			if tmp then coroutine.yield(tmp) end
 		end
 	end
