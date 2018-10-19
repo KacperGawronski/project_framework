@@ -25,6 +25,7 @@ function SELECT(s)
 		SELECT=SELECT.."AND "..k..v[1].."'"..v[2].."' "
 	end
 	SELECT=SELECT..string.format("LIMIT %d",limit)
+	print(SELECT)
 	return SELECT
 	
 end
