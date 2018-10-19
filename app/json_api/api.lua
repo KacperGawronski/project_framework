@@ -15,7 +15,7 @@ function SELECT(s)
 		elseif k=="data_table" then
 			data_table=v
 		elseif k=="fields" then
-			if fields=="*" then fields=k else fields=fields..k end
+			if fields=="*" then fields=v else fields=fields..v end
 		else
 			t[k]={sign,v}
 		end
