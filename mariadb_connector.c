@@ -65,8 +65,7 @@ int mariadb_execute_select(lua_State *L){
 	
 	*/
 	main_array=json_array();
-	
-	
+
 	while(row=mysql_fetch_row(res)){
 		json_row=json_object();
 		for(i=0;i<n_fields;++i){

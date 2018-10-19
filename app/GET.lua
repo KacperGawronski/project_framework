@@ -23,6 +23,84 @@ dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
 
 function process_request(http_request)
+	
+	local GET_value,n=string.gsub(http_request,"GET (.+) HTTP/1%.1.*","%1")
+	local request_OK="HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n"
+	local mt={}
+	options={}
+	options.f={}
+	options.g={}
+	
+	options.g.page= function()
+		local s,n=string.gsub(GET_value,"/page%?(.+)","%1")
+		if n>0 then
+			coroutine.yield(request_OK)
+			local f=dofile("app/pages/"..s..".lua")
+			if f then for s in f do
+				coroutine.yield(s)
+			end end
+		end
+	end
+	options.f.page=coroutine.wrap(function () options.g.page() end)
+	
+	options.g["api.json"]=function()	
+		local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
+		if n>0 then
+			coroutine.yield(request_OK)
+			dofile("app/json_api/api.lua")
+			local tmp=mariadb_execute_select(SELECT(s))
+			if tmp then coroutine.yield(tmp) end
+		end
+	end
+	options.f["api.json"]=coroutine.wrap(function () options.g["api.json"]() end)
+	
+	options.g["js"]=function ()
+		local s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
+		if n>0 then
+			coroutine.yield(request_OK)
+			coroutine.yield(get_js_file(s))
+		end
+	end
+	options.f["js"]=coroutine.wrap(function () options.g["js"]() end)
+	
+	
+	options.g["css"]=function ()
+		local s,n=string.gsub(GET_value,"/(.+)%.css","app/css/%1.css")
+		if n>0 then
+			coroutine.yield(request_OK)
+			coroutine.yield(get_css_file(s))
+		end
+	end
+	options.f["css"]=coroutine.wrap(function () options.g["css"]() end)
+	
+	options.g["/"]=function ()
+		local f=dofile("app/pages/index.lua")
+		if f then for s in f do
+			coroutine.yield(s)
+		end end	
+	end
+	options.f["/"]=coroutine.wrap(function () options.g["/" end)
+	
+	options.mt={}
+	options.mt.__index=function (t,v)
+		local filetype,n=string.gsub(v,".*%.(%w+).*","%1")
+		if n>0 and (filetype=="css" or filetype=="js") then
+			return options[filetype]
+		end
+		local v=v:gsub("/(.*)%??.*","%1")
+		if not v then v="/"
+		return options.f[v]
+	end
+	setmetatable(options,options.mt)
+
+	return(options[GET_VALUE])
+
+end
+
+
+--[[ UGLY VERSION
+
+function process_request(http_request)
 	local main=  function ()
 		local GET_value,n=string.gsub(http_request,"GET (.+) HTTP/1%.1.*","%1")
 		if n>0 then
@@ -60,3 +138,4 @@ function process_request(http_request)
 	end
 	return main
 end
+--]]

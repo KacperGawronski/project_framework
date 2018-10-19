@@ -24,12 +24,12 @@ dofile("app/head.lua")
 local function f(t)
 
 	coroutine.yield("<!DOCTYPE html>\
-<html>")
+<html><body>")
 	coroutine.yield(generate_head(t))
 	for txt in t.body() do
 		coroutine.yield(txt)
 	end
-	coroutine.yield("</html>")
+	coroutine.yield("</body></html>")
 end
 
 return function(t) return coroutine.wrap(function () f(t) end) end

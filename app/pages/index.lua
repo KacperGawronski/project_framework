@@ -27,12 +27,11 @@ local function f()
 	page_structure.script=""
 	page_structure.body=function ()
 		local function f()
-			coroutine.yield("<body>")
 			coroutine.yield("<h2>Welcome to open example Framework based on Lua_WebServer and Example Lua App</h2></br>")
 			coroutine.yield("You can find them on github:</br>\
 <a href=\"https://github.com/KacperGawronski/Lua_Webserver\">Lua_Webserver</a></br>\
 <a href=\"https://github.com/KacperGawronski/example_Lua_app\">example_Lua_app</a></br>")
-			coroutine.yield("Both are licensed under GNU General Public License v3</body>")
+			coroutine.yield("Both are licensed under GNU General Public License v3")
 		end
 		return coroutine.wrap(function () f() end)
 	end

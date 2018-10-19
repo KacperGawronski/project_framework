@@ -27,9 +27,7 @@ local function f()
 	page_structure.script="<script src=\"example.js\"></script>"
 	page_structure.body=function ()
 		local function f()
-			coroutine.yield("<body>")
 			coroutine.yield("<div id=\"example\"></div>")
-			coroutine.yield("</body>")
 		end
 		return coroutine.wrap(function () f() end)
 	end
