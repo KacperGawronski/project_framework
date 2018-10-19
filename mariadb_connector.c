@@ -10,6 +10,7 @@ int mariadb_execute_select(lua_State *L){
 	MYSQL_FIELD *field_names;
 	int n_fields,n_rows,i,index;
 	char *s;
+	json_t *main_array,*json_field,*json_row;
 	conn=mysql_init(NULL);
 	if(!mysql_real_connect(conn,HOST,USER,PASS,DATABASE,PORT,SOCKET,OPTIONS)){
 		return 0;
@@ -22,10 +23,11 @@ int mariadb_execute_select(lua_State *L){
 	}
 	lua_pop(L,1);
 	res=mysql_use_result(conn);
+	if(res==NULL)return 0;
 	n_rows=mysql_num_rows(res);
 	n_fields=mysql_num_fields(res);
 	field_names=mysql_fetch_fields(res);
-	
+	if(field_names==NULL)return 0;
 	/*lua_createtable(L, n_rows, n_rows);
 	
 	while(row=mysql_fetch_row(res)){
@@ -41,7 +43,6 @@ int mariadb_execute_select(lua_State *L){
 	}
 	
 	*/
-	json_t *main_array,*json_field,*json_row;
 	main_array=json_array();
 	
 	
