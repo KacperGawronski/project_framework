@@ -17,14 +17,15 @@ return function(s)
 			t[sqlize(k)]=sqlize(v)
 		end
 	end
+	print(limit,
 	local fields="*"
 	for k,v in t do
 		fields=fields=="*" and k or fields..","..k
 	end
 	SELECT = string.format("SELECT %s FROM %s WHERE 1",fields,data_table)
 	for k,v in t do
-		SELECT=SELECT.."AND "..k.."='"..v.."'"
+		SELECT=SELECT.." AND "..k.."='"..v.."'"
 	end
-	return SELECT..";"
+	return SELECT.."LIMIT %s;":format(limit)
 	
 end
