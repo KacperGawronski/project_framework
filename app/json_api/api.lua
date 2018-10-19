@@ -10,9 +10,9 @@ function SELECT(s)
 			tmp=tonumber(v)
 			if tmp<30 then limit=tmp else limit=30 end
 		elseif k=="data_table" then
-			data_table=sqlize(v)
+			data_table=v
 		else
-			t[sqlize(k)]=sqlize(v)
+			t[k]=v
 		end
 	end
 	print(limit,data_table)
