@@ -31,7 +31,6 @@ struct stack_element{
 	pthread_t thread_id;
 	int s;
 	struct stack_element *next,*prev;
-	lua_State *Lua_interpreter;
 }*stack;
 
 

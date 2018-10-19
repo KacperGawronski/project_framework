@@ -73,19 +73,6 @@ int main(void){
 	for(s=0;s<MAX_THREADS_NUMBER;++s){
 		tmp=malloc(sizeof(*tmp));
 		tmp->s=0;
-		
-		/*STARTING Lua interpreter*/
-		tmp->Lua_interpreter=luaL_newstate();
-		luaL_openlibs(tmp->Lua_interpreter);
-		
-		/*initializing database connection function*/
-		lua_pushcfunction(tmp->Lua_interpreter,mariadb_execute_select);
-		lua_setglobal(tmp->Lua_interpreter,"mariadb_execute_select");
-		lua_pushnil(tmp->Lua_interpreter);
-		/*loading app*/
-		tmp_s=luaL_dofile(tmp->Lua_interpreter,"app/app.lua");
-		if(tmp_s){perror("Error loading script:");return 6;}
-		stack_push(tmp);
 	}
 
 
