@@ -41,7 +41,9 @@ function process_request(http_request)
 					else
 						s,n=string.gsub(GET_value,"/page%?(.+)")
 						if n>0 then
+							print("lulz")
 							local f=dofile("app/pages/"..s..".lua")
+							print("lul2")
 							if f then for s in f do
 								coroutine.yield(s)
 							end end
