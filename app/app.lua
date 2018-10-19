@@ -23,7 +23,7 @@ dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
 
 function process_request(http_request)
-	
+	print("RQ")
 	local main=  function ()
 		local GET_value,n=string.gsub(http_request,"GET (.-) HTTP/1%.1.*","%1")
 		if n> 0 then

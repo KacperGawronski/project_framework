@@ -118,9 +118,8 @@ int main(void){
 	}
 	
 	
-	
+	sockaddr_len=sizeof(tmp_sockaddr);
 	while(1){
-		sockaddr_len=sizeof(tmp_sockaddr);
 		memset(&tmp_sockaddr,0,sockaddr_len);
 		if((tmp_s=accept(s,&tmp_sockaddr,&sockaddr_len))<0)return 4;
 		tmp=stack_pop();
