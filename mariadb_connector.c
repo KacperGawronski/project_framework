@@ -18,9 +18,7 @@ int mariadb_execute_select(lua_State *L){
 	
 	if(!lua_isstring(L,-1))return 0;
 	if(mysql_query(conn,lua_tostring(L,-1))){
-		printf("%s\n",lua_tostring(L,-1));
 		lua_pop(L,1);
-		printf("query\n");
 		return 0;
 	}
 	lua_pop(L,1);

@@ -2,7 +2,7 @@
 function SELECT(s)
 	local t={}
 	local limit=30
-	local data_table="employee"
+	local data_table="employees"
 	for k,v in s:gmatch("(%w+)=(%w+)") do
 		if k=="limit" then
 			local tmp
