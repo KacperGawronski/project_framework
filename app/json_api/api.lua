@@ -3,7 +3,7 @@ function SELECT(s)
 	local t={}
 	local limit=30
 	local data_table="employees"
-	for k,sign,v in s:gmatch("([a-zA-Z1-9,_]+)([<=>]+)([a-zA-Z1-9_]+)") do
+	for k,sign,v in s:gmatch("([%w_,]+)([<=>]+)([%w_,]+)") do
 		if k=="limit" then
 			local tmp
 			tmp=tonumber(v)
