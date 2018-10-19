@@ -49,21 +49,8 @@ int mariadb_execute_select(lua_State *L){
 	n_fields=mysql_num_fields(res);
 	field_names=mysql_fetch_fields(res);
 	if(field_names==NULL)return 0;
-	/*lua_createtable(L, n_rows, n_rows);
 	
-	while(row=mysql_fetch_row(res)){
-		lua_pushnumber(L,++counter);
-		lua_createtable(L,0,n_fields);
-		for(i=0;i<n_fields;++i){
-			
-			lua_pushstring(L,field_names[i].name);
-			lua_pushstring(L,row[i]);
-			lua_settable(L,-3);
-		}
-		lua_settable(L,-3);
-	}
 	
-	*/
 	main_array=json_array();
 
 	while(row=mysql_fetch_row(res)){

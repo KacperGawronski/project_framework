@@ -24,8 +24,9 @@ dofile("app/head.lua")
 local function f(t)
 
 	coroutine.yield("<!DOCTYPE html>\
-<html><body>")
+<html><body>\n")
 	coroutine.yield(generate_head(t))
+	if generate_menu then coroutine.yield(generate_menu())
 	for txt in t.body() do
 		coroutine.yield(txt)
 	end

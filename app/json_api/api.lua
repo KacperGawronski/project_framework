@@ -4,9 +4,7 @@ function SELECT(s)
 	local limit=30
 	local data_table="employees"
 	local fields="*"
-	print(s)
 	s=string.gsub(s,"'","''"):gsub("%%3E",">"):gsub("%%3C","<")
-	print(s)
 	for k,sign,v in s:gmatch("([%w_,]+)([<=>]+)([%w_,]+)") do
 		if k=="limit" then
 			local tmp
@@ -29,7 +27,6 @@ function SELECT(s)
 		SELECT=SELECT.."AND "..k..v[1].."'"..v[2].."' "
 	end
 	SELECT=SELECT..string.format("LIMIT %d",limit)
-	print(SELECT)
 	return SELECT
 	
 end
