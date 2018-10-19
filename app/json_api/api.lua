@@ -1,6 +1,6 @@
 
 function SELECT(s)
-	s=gsub(s,"'","''")
+	s=gsub(s,".*(').*","''")
 	local t={}
 	local limit=30
 	local data_table="employee"
