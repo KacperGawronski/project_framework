@@ -19,7 +19,7 @@ int mariadb_execute_select(lua_State *L){
 		lua_pop(L,1);
 		return 0;
 	}
-	lua_pop(L,1);
+	/*lua_pop(L,1);*/
 	res=mysql_use_result(conn);
 	n_rows=mysql_num_rows(res);
 	n_fields=mysql_num_fields(res);
