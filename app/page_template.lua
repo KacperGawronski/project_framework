@@ -25,7 +25,7 @@ local function f(t)
 	coroutine.yield("<!DOCTYPE html>\
 <html><body>\n")
 	coroutine.yield(generate_head(t))
-	if generate_menu~=nil then coroutine.yield(generate_menu())
+	if generate_menu then coroutine.yield(generate_menu()) end
 	for txt in t.body() do
 		coroutine.yield(txt)
 	end
