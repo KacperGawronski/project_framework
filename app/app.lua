@@ -40,7 +40,7 @@ function process_request(http_request)
 			else
 				local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
 				if n>0 then
-					--dofile("app/json_api/api.lua")
+					dofile("app/json_api/api.lua")
 					print("File loaded")
 					--str=SELECT(s)
 					print(s)
