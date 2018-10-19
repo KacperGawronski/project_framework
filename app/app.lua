@@ -42,7 +42,7 @@ function process_request(http_request)
 				print(s)
 				if n>0 then
 					t={}
-					for k,v in s:gmatch("(%w)=(%w)") do
+					for k,v in s:gmatch("(%w+)=(%w+)") do
 						print(k,v)
 						t[k]=v
 					end
