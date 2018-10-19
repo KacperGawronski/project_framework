@@ -81,7 +81,7 @@ int main(void){
 		/*initializing database connection function*/
 		lua_pushcfunction(tmp->Lua_interpreter,mariadb_execute_select);
 		lua_setglobal(tmp->Lua_interpreter,"mariadb_execute_select");
-		
+		lua_pop(tmp->Lua_interpreter,1);
 		/*loading app*/
 		tmp_s=luaL_dofile(tmp->Lua_interpreter,"app/app.lua");
 		if(tmp_s){perror("Error loading script:");return 6;}
