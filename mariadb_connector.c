@@ -1,4 +1,5 @@
 #include "mariadb_connector.h"
+#include <jansson.h>
 #include <mariadb/mysql.h>
 
 
@@ -8,6 +9,7 @@ int mariadb_execute_select(lua_State *L){
 	MYSQL_ROW row;
 	MYSQL_FIELD *field_names;
 	int n_fields,n_rows,i,index,counter;
+	char *s;
 	conn=mysql_init(NULL);
 	if(!mysql_real_connect(conn,HOST,USER,PASS,DATABASE,PORT,SOCKET,OPTIONS)){
 		return 0;
@@ -23,7 +25,8 @@ int mariadb_execute_select(lua_State *L){
 	n_fields=mysql_num_fields(res);
 	field_names=mysql_fetch_fields(res);
 	counter=0;
-	lua_createtable(L, n_rows, n_rows);
+	
+	/*lua_createtable(L, n_rows, n_rows);
 	
 	while(row=mysql_fetch_row(res)){
 		lua_pushnumber(L,++counter);
@@ -36,8 +39,24 @@ int mariadb_execute_select(lua_State *L){
 		}
 		lua_settable(L,-3);
 	}
+	
+	*/
+	json_t *main_array,*json_field,*json_row;
+	main_array=json_array();
+	
+	
+	while(row=mysql_fetch_row(res)){
+		json_row=json_object();
+		for(i=0;i<n_fields;++i){
+			json_object_set(json_row,field_names[i].name,row[i])
+		}
+		json_array_append(main_array,json_row);
+	}
+	s=json_dumps(main_array,0);
+	lua_pushstring(L,s);
 	mysql_free_result(res);
 	mysql_close(conn);
+	free(s);
 	return 1;
 }
 
