@@ -24,7 +24,7 @@ https://www.gnu.org/licenses/
 #include <string.h>
 #include <stdio.h>
 
-#include <regex.h>
+#include "mariadb_connector.h"
 
 #include <lua5.3/lua.h>
 #include <lua5.3/lualib.h>

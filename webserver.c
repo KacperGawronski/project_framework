@@ -32,7 +32,6 @@ https://www.gnu.org/licenses/
 #include <lua5.3/lualib.h>
 #include <lua5.3/lauxlib.h>
 
-#include "mariadb_connector.h"
 
 static int s;
 
@@ -58,6 +57,7 @@ int main(void){
 	struct sockaddr tmp_sockaddr;
 	struct stack_element *tmp;
 	socklen_t sockaddr_len;
+	int tmp_s;
 
 
 	/*signals*/
