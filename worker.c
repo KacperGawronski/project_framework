@@ -37,6 +37,7 @@ void *worker(void *arg){
 	extern sem_t counter_sem;
 	char buffer[HTTP_REQUEST_SIZE];
 	int n,i;
+	int tmp_s;
 	
 	const char *response;
 	

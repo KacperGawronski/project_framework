@@ -55,7 +55,6 @@ pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 int main(void){
 	struct addrinfo hints;
 	struct addrinfo *result,*rp;
-	int tmp_s;
 	struct sockaddr tmp_sockaddr;
 	struct stack_element *tmp;
 	socklen_t sockaddr_len;
