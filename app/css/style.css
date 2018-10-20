@@ -13,6 +13,7 @@
 	padding:1%;
 	display:block;
 	float:left;
+	margin-left:25%;
 }
 menu{
 	display:block;
@@ -30,7 +31,7 @@ menu ul{
 
 menu ul li{
 	display:block;
-	background-color: #0d0;
+	background-color: #0c0;
 	color: #0f0;
 	text-decoration:none;
 	padding:2px;
