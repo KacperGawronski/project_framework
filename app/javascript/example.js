@@ -1,12 +1,11 @@
 var client = new XMLHttpRequest();
-var contentARR;
-var contentTEXT;
+var contentTEXT="";
 
 
 function parse_obj(Obj){
 	txt="<tr>"
 	for(k in Obj){
-		"<td>"+Obj[k]+"</td>"
+		txt+="<td>"+Obj[k]+"</td>"
 	}
 	return txt+"</tr>"
 }
