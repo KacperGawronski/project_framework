@@ -14,7 +14,7 @@
 #main{
 	width:74%;
 	padding:1%;
-	margin-left:26%;
+	margin-left:25%;
 }
 menu{
 	position:relative;
@@ -33,9 +33,12 @@ menu ul{
 menu ul li{
 	display:block;
 	background-color: #0c0;
-	color: #0f0;
-	text-decoration:none;
 	padding:2px;
+	text-align:center;
+}
+menu ul li a{
+	text-decoration:none;
+	color: #0f0;
 }
 
 
