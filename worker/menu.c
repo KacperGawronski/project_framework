@@ -40,7 +40,7 @@ int generate_menu(lua_State *L){
 	lua_pushnumber(L,strings_amount);
 	lua_pushstring(L,"<menu class=\"main_menu\"><ul class=\"menu_list\">");
 	lua_settable(L,-3);
-	make_tree(L,"./pages");
+	make_tree(L,"./app/pages");
 	++strings_amount;
 	lua_pushnumber(L,strings_amount);
 	lua_pushstring(L,"</menu></ul>");
