@@ -23,7 +23,7 @@ https://www.gnu.org/licenses/
 local function f()
 	local process_template=dofile("app/page_template.lua")
 	local page_structure={}
-	page_structure.title="Example index for framework"
+	page_structure.title="Example use of json api."
 	page_structure.script="<script src=\"example.js\"></script>"
 	page_structure.body=function ()
 		local function f()
