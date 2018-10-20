@@ -11,8 +11,7 @@
 #main{
 	width:75%;
 	padding:1%;
-	display:block;
-	float:left;
+	display:inline-block;
 	margin-left:25%;
 }
 menu{
