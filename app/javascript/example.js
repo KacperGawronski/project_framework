@@ -3,7 +3,6 @@
 function get_val_from_request(){
 	var query="/api.json?limit=100";
 	function append_q(val){
-		for(i=0;i<val.attributes.length;i++){console.log(i,val.attributes[i].name);}
 		if(val.value){query+="&"+val.attributes[0].name+val.value;}
 	}
 	var query_parts=document.getElementsByClassName("QUERY");
@@ -50,7 +49,7 @@ function get_value(){
 		}	
 		var responseArray = JSON.parse(client.responseText);
 		for (k in responseArray[0]){
-			contentTEXT+="<td><form action=\"javascript:void(0);\" onsubmit=\"get_val_from_request()\" id=\""+k+"\">"+k+"</br><input class=\"QUERY\" value=\"\"></form></td>"
+			contentTEXT+="<td><form action=\"javascript:get_value_from_request();\">"+k+"</br><input name=\""+k+"\" class=\"QUERY\"></form></td>"
 		}
 		contentTEXT += "</tr>"
 		responseArray.forEach(parse_obj);
