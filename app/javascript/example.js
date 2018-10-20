@@ -10,7 +10,9 @@ function get_val_from_request(){
 	}
 	
 	var client = new XMLHttpRequest();
+	
 	client.open('GET', query);
+	document.getElementById("banner").innerHTML = query;
 	client.onreadystatechange = function() {		
 		var contentTEXT = "<table style=\"display:block;\"><tr id=\"table_header\">"
 		function parse_obj(Obj){
