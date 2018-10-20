@@ -3,17 +3,19 @@ var contentTEXT="";
 
 
 function parse_obj(Obj){
-	txt="<tr>"
+	contentTEXT+="<tr>"
 	for(k in Obj){
-		txt+="<td>"+Obj[k]+"</td>"
+		contentTEXT+="<td>"+Obj[k]+"</td>"
 	}
-	return txt+"</tr>"
+	contentTEXT+"</tr>"
 }
 
 
 client.open('GET', '/api.json?limit=30');
 client.onreadystatechange = function() {
-  contentTEXT = "<table>"+JSON.parse(client.responseText).forEach(parse_obj)+"</table>";
+  contentTEXT = "<table>"
+  JSON.parse(client.responseText).forEach(parse_obj)
+  contentTEXT+="</table>";
 }
 client.send();
 
