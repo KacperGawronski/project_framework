@@ -49,7 +49,7 @@ function get_value(){
 		}	
 		var responseArray = JSON.parse(client.responseText);
 		for (k in responseArray[0]){
-			contentTEXT+="<td><form action=\"javascript:get_value_from_request();\">"+k+"</br><input name=\""+k+"\" class=\"QUERY\"></form></td>"
+			contentTEXT+="<td><form action=\"javascript:get_val_from_request();\">"+k+"</br><input name=\""+k+"\" class=\"QUERY\"></form></td>"
 		}
 		contentTEXT += "</tr>"
 		responseArray.forEach(parse_obj);
