@@ -20,7 +20,7 @@ function get_val_from_request(){
 		}	
 		var responseArray = JSON.parse(client.responseText);
 		for (k in responseArray[0]){
-			contentTEXT+="<td><form action=\"javascript:void(0);\" onsubmit=\"get_val_from_request()\" id=\""+k+"\">"+k+"</br><input class=\"QUERY\" value=\"\"></form></td>"
+			contentTEXT+="<td><form action=\"javascript:get_val_from_request();\" onsubmit=\"get_val_from_request()\" id=\""+k+"\">"+k+"</br><input class=\"QUERY\" value=\"\"></form></td>"
 		}
 		contentTEXT += "</tr>"
 		responseArray.forEach(parse_obj);
