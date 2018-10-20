@@ -10,13 +10,15 @@ function parse_obj(Obj){
 	contentTEXT+"</tr>"
 }
 
-
-client.open('GET', '/api.json?limit=30');
-client.onreadystatechange = function() {
-  contentTEXT = "<table>"
-  (JSON.parse(client.responseText)).forEach(parse_obj)
-  contentTEXT+="</table>";
+function gen_value(){
+	client.open('GET', '/api.json?limit=30');
+	client.onreadystatechange = function() {
+	  contentTEXT = "<table>"
+	  (JSON.parse(client.responseText)).forEach(parse_obj)
+	  contentTEXT+="</table>";
+	}
+	client.send();
 }
-client.send();
 
-document.getElementById("example").innerHTML = contentTEXT
+
+document.getElementById("example").innerHTML = gen_value
