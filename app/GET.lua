@@ -71,7 +71,7 @@ function process_request(http_request)
 	options.g["css"]=function ()
 		local s,n=string.gsub(GET_value,"/(.+)%.css","app/css/%1.css")
 		if n>0 then
-			coroutine.yield(request_OK)
+			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: text/css; charset=UTF-8\r\nConnection: close\r\n\r\n")
 			coroutine.yield(get_css_file(s))
 		end
 	end
