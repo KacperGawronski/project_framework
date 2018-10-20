@@ -49,3 +49,6 @@ body{
 	background-color: #070;
 }
 
+.row_textarea{
+	resize:none;
+}
