@@ -10,7 +10,8 @@ function get_value(){
 	}	
 	client.open('GET', '/api.json?limit=30');
 	client.onreadystatechange = function() {
-		(JSON.parse(client.responseText)).forEach(parse_obj)
+		ARR=JSON.parse(client.responseText)
+		ARR.forEach(parse_obj)
 	}
 	client.send();
 	contentTEXT +="</table>";
