@@ -1,6 +1,7 @@
 #banner{
+	width:100%;
 	display:block;
-	background-color: #bbffbb;
+	background-color: #aaffaa;
 	text-align:center;
 	text-decoration:none;
 }
