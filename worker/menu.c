@@ -66,7 +66,7 @@ int generate_menu(lua_State *L){
 	make_tree(L,str,&strings_amount);
 	++strings_amount;
 	lua_pushnumber(L,strings_amount);
-	lua_pushstring(L,"</menu></ul>");
+	lua_pushstring(L,"</ul></menu>");
 	lua_settable(L,-3);
 	
     return 1;

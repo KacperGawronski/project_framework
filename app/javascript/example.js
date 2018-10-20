@@ -8,6 +8,7 @@ function get_val_from_request(){
 	var result=document.getElementsByClassName("QUERY").forEach(append_q);
 	
 	var client = new XMLHttpRequest();
+	console.write(query);
 	client.open('GET', query);
 	client.onreadystatechange = function() {		
 		var contentTEXT = "<table style=\"display:block;\"><tr id=\"table_header\">"
