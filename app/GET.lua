@@ -30,6 +30,14 @@ function process_request(http_request)
 	local options={}
 	options.g={}
 	
+	options.g["/"]=function ()
+		local f=dofile("app/pages/index.lua")
+		coroutine.yield(request_OK)
+		if f then for s in f do
+			coroutine.yield(s)
+		end end	
+	end
+	
 	options.g.page= function()
 		local s,n=string.gsub(GET_value,"/page%?(.+)","%1")
 		if n>0 then
@@ -68,13 +76,6 @@ function process_request(http_request)
 		end
 	end
 
-	options.g["/"]=function ()
-		local f=dofile("app/pages/index.lua")
-		coroutine.yield(request_OK)
-		if f then for s in f do
-			coroutine.yield(s)
-		end end	
-	end
 	
 	options.mt={}
 	options.mt.__index=function (t,v)
