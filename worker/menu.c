@@ -21,9 +21,10 @@ static void make_tree(lua_State *L, char *path){
 						strncpy(cur_name,entry->d_name,strlen(entry->d_name)-4);
 						cur_name[strlen(entry->d_name)-4]='\0';
 						snprintf(cur_item,255,"<li class=\"menu_button\"><a class=\"menu_link\" href=\"page?%s\">%s</a></li>",cur_name,cur_name);
-						lua_pushstring(L,cur_item);
 						++strings_amount;
-						lua_setfield(L,-2,strings_amount);
+						lua_pushnumber(L,strings_amount);
+						lua_pushstring(L,cur_item);
+						lua_settable(L,-3);
 					}
 					break;
 			}
@@ -35,13 +36,15 @@ static void make_tree(lua_State *L, char *path){
 
 int generate_menu(lua_State *L){
 	lua_newtable(L)
+	++strings_amount;
+	lua_pushnubmer(L,strings_amount);
 	lua_pushstring(L,"<menu class=\"main_menu\"><ul class=\"menu_list\">");
-	++strings_amount;
-	lua_setfield(L,-2,strings_amount);
+	lua_settable(L,-3);
 	make_tree(L,"./pages");
-	lua_pushstring(L,"</menu></ul>");
 	++strings_amount;
-	lua_setfield(L,-2,strings_amount);
+	lua_pushnubmer(L,strings_amount);
+	lua_pushstring(L,"</menu></ul>");
+	lua_settable(L,-3);
 	
     return 1;
 }
