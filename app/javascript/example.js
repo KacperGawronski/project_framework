@@ -5,8 +5,9 @@ function get_val_from_request(){
 	function append_q(val){
 		query+="&"+val.id+val.value;
 	}
-	for(i in document.getElementsByClassName("QUERY")){
-		append_q(i)
+	var query_parts=document.getElementsByClassName("QUERY");
+	for(i=0;i<query_parts.length;i++){
+		append_q(query_parts[i]);
 	}
 	
 	var client = new XMLHttpRequest();
