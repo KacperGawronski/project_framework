@@ -2,7 +2,7 @@ function get_value(){
 	var client = new XMLHttpRequest();
 	client.open('GET', '/api.json?limit=30');
 	client.onreadystatechange = function() {		
-		var contentTEXT = "<table>"
+		var contentTEXT = "<table><tr id=\"table_header\">"
 		function parse_obj(Obj){
 			contentTEXT +="<tr>"
 			for(k in Obj){
@@ -10,7 +10,12 @@ function get_value(){
 			}
 			contentTEXT +="</tr>"
 		}	
-		JSON.parse(client.responseText).forEach(parse_obj)
+		var responseArray = JSON.parse(client.responseText);
+		for (k in responseArray[0]){
+			contentTEXT+="<td>"+k+"</br><textarea class=\"row_textarea\" id=\""+k+"\"/></td>"
+		}
+		contentTEXT += "</tr>"
+		responseArray.forEach(parse_obj);
 		contentTEXT +="</table>";
 		document.getElementById("example").innerHTML = contentTEXT
 	}
