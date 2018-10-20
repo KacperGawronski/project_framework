@@ -1,8 +1,4 @@
-
-var client = new XMLHttpRequest();
-
-
-document.getElementById("example").innerHTML = function (){
+function get_value(){
 	var client = new XMLHttpRequest();
 	var contentTEXT = "<table>"
 	function parse_obj(Obj){
@@ -18,5 +14,7 @@ document.getElementById("example").innerHTML = function (){
 	}
 	client.send();
 	contentTEXT +="</table>";
-	return contentTEXT;
+	return contentTEXT;	
 }
+
+document.getElementById("example").innerHTML = get_value
