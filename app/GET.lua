@@ -52,7 +52,7 @@ function process_request(http_request)
 	options.g["api.json"]=function()	
 		local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
 		if n>0 then
-			coroutine.yield(request_OK)
+			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nConnection: close\r\n\r\n")
 			dofile("app/json_api/api.lua")
 			local tmp=mariadb_execute_select(SELECT(s))
 			if tmp then coroutine.yield(tmp) end
@@ -62,7 +62,7 @@ function process_request(http_request)
 	options.g["js"]=function ()
 		local s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
 		if n>0 then
-			coroutine.yield(request_OK)
+			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: application/javascript; charset=UTF-8\r\nConnection: close\r\n\r\n")
 			coroutine.yield(get_js_file(s))
 		end
 	end

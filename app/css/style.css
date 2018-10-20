@@ -1,4 +1,12 @@
 
+#banner{
+	display:block;
+	background-color: #090;
+	color: #0c0;
+	text-align:center;
+	font-family:sans-seriff;
+}
+
 body{
-	background-color: #aaffaa;
+	background-color: #aaf;
 }
