@@ -3,22 +3,21 @@ var contentTEXT="";
 
 
 function parse_obj(Obj){
-	contentTEXT+="<tr>"
+	document.getElementById("example").innerHTML +="<tr>"
 	for(k in Obj){
-		contentTEXT+="<td>"+Obj[k]+"</td>"
+		document.getElementById("example").innerHTML +="<td>"+Obj[k]+"</td>"
 	}
-	contentTEXT+"</tr>"
+	document.getElementById("example").innerHTML +="</tr>"
 }
 
-function gen_value(){
-	client.open('GET', '/api.json?limit=30');
-	client.onreadystatechange = function() {
-	  contentTEXT = "<table>"
-	  (JSON.parse(client.responseText)).forEach(parse_obj)
-	  contentTEXT+="</table>";
-	}
-	client.send();
+client.open('GET', '/api.json?limit=30');
+client.onreadystatechange = function() {
+  document.getElementById("example").innerHTML += "<table>"
+  (JSON.parse(client.responseText)).forEach(parse_obj)
+  document.getElementById("example").innerHTML +="</table>";
 }
+client.send();
 
 
-document.getElementById("example").innerHTML = gen_value
+
+ gen_value
