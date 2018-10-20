@@ -22,7 +22,7 @@ https://www.gnu.org/licenses/
 dofile("app/head.lua")
 local function f(t)
 	
-	local default_banner="<div id=\"banner\"><h1 class=\"banner_header\">Project Framework</h1></div>"
+	local default_banner="<div id=\"banner\"><h1 class=\"banner_header\"><a href=\"page?index\">Project Framework</h1></div>"
 
 	coroutine.yield("<!DOCTYPE html>\
 <html>")
