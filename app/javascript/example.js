@@ -10,7 +10,7 @@ function get_value(){
 	}	
 	client.open('GET', '/api.json?limit=30');
 	client.onreadystatechange = function() {
-		document.getElementById("example").innerHTML = client.responseText
+		document.getElementById("example").innerHTML = JSON.parse(client.responseText)[0]["emp_no"]
 	}
 	client.send();
 	contentTEXT +="</table>";
