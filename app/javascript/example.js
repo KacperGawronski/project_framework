@@ -5,7 +5,7 @@ function get_val_from_request(){
 	function append_q(val){
 		query+="&"+val.id+val.value;
 	}
-	var result=document.getElementsByClassName("QUERY").forEach(append_q);
+	document.getElementsByClassName("QUERY").forEach(append_q);
 	
 	var client = new XMLHttpRequest();
 	console.write(query);
