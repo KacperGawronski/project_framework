@@ -1,4 +1,5 @@
-div[id="banner"]{
+#banner{
+	display:block;
 	background-color: #bbffbb;
 	text-align:center;
 	text-decoration:none;
