@@ -26,7 +26,7 @@ local function f(t)
 <html>")
 	coroutine.yield(generate_head(t))
 	coroutine.yield("<body>")
-	local menu=generate_menu()
+	local menu=generate_menu("./app/pages")
 	if generate_menu then for _,v in ipairs(menu) do coroutine.yield(v) end end
 	for txt in t.body() do
 		coroutine.yield(txt)

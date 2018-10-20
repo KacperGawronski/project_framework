@@ -53,8 +53,12 @@ void *worker(void *arg){
 		/*initializing database connection function*/
 		lua_pushcfunction(L,mariadb_execute_select);
 		lua_setglobal(L,"mariadb_execute_select");
+		
+		/*implemented bug here*/
 		lua_pushcfunction(L,generate_menu);
 		lua_setglobal(L,"generate_menu");
+		/*end of bug*/
+		
 		lua_pushnil(L);
 		/*loading app*/
 		tmp_s=luaL_dofile(L,"app/GET.lua");
