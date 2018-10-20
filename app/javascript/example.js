@@ -12,7 +12,7 @@ function get_value(){
 		}	
 		var responseArray = JSON.parse(client.responseText);
 		for (k in responseArray[0]){
-			contentTEXT+="<td>"+k+"</br><textarea class=\"row_textarea\" id=\""+k+"\"></textarea></td>"
+			contentTEXT+="<td>"+k+"</br><textarea class=\"row_textarea\" rows=1 id=\""+k+"\"></textarea></td>"
 		}
 		contentTEXT += "</tr>"
 		responseArray.forEach(parse_obj);
