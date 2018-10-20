@@ -17,4 +17,4 @@ function get_value(){
 	return contentTEXT;	
 }
 
-document.getElementById("example").innerHTML = get_value
+document.getElementById("example").innerHTML = get_value()
