@@ -23,7 +23,7 @@ https://www.gnu.org/licenses/
 #include <string.h>
 #include <stdio.h>
 
-static void make_tree(lua_State *L, char *path,int *string_amount){
+static void make_tree(lua_State *L, char *path,int *strings_amount){
 	char cur_item[256];
 	char cur_name[128];
 	DIR *dir;
@@ -54,7 +54,7 @@ static void make_tree(lua_State *L, char *path,int *string_amount){
 
 int generate_menu(lua_State *L){
 	int strings_amount=0;
-	char *str;
+	const char *str;
 	str=lua_tostring(L,-1);
 	lua_pop(L,1);
 	lua_newtable(L);
