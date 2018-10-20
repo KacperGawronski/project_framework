@@ -1,15 +1,16 @@
-
+*{padding:0;}
 #banner{
 	display:block;
+	padding:3%;
 	background-color: #090;
 	color: #0c0;
 	text-align:center;
 	font-family:sans-seriff;
 }
 #main{
+	width:70%;
 	display:block;
 	float:left;
-
 }
 menu{
 	display:block;
