@@ -11,7 +11,7 @@ function parse_obj(Obj){
 }
 
 
-client.open('GET', '/api.json?limit=300');
+client.open('GET', '/api.json?limit=30');
 client.onreadystatechange = function() {
   contentTEXT = "<table>"+JSON.parse(client.responseText).forEach(parse_obj)+"</table>";
 }
