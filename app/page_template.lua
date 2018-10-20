@@ -21,11 +21,16 @@ https://www.gnu.org/licenses/
 
 dofile("app/head.lua")
 local function f(t)
+	
+	local default_banner="<div id=\"banner\"><h1 class=\"banner_header\">Project</h1></div>"
 
 	coroutine.yield("<!DOCTYPE html>\
 <html>")
 	coroutine.yield(generate_head(t))
 	coroutine.yield("<body>")
+	if t.banner then coroutine.yield(t.banner) else
+		coroutine.yield(default_banner)
+	end
 	if generate_menu then for _,v in ipairs(generate_menu("app/pages")) do coroutine.yield(v) end end
 	for txt in t.body() do
 		coroutine.yield(txt)
