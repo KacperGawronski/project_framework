@@ -1,23 +1,24 @@
-var client = new XMLHttpRequest();
-var contentTEXT="";
 
-
-function parse_obj(Obj){
-	document.getElementById("example").innerHTML +="<tr>"
-	for(k in Obj){
-		document.getElementById("example").innerHTML +="<td>"+Obj[k]+"</td>"
+function gen_value(){
+	var client = new XMLHttpRequest();
+	var contentTEXT="";
+	function parse_obj(Obj){
+		contentTEXT +="<tr>"
+		for(k in Obj){
+			contentTEXT +="<td>"+Obj[k]+"</td>"
+		}
+		contentTEXT +="</tr>"
 	}
-	document.getElementById("example").innerHTML +="</tr>"
+
+	client.open('GET', '/api.json?limit=30');
+	client.onreadystatechange = function() {
+	  contentTEXT += "<table>"
+	  (JSON.parse(client.responseText)).forEach(parse_obj)
+	  contentTEXT +="</table>";
+	}
+	client.send();
+	return contentTEXT;
 }
 
-client.open('GET', '/api.json?limit=30');
-client.onreadystatechange = function() {
-  document.getElementById("example").innerHTML += "<table>"
-  (JSON.parse(client.responseText)).forEach(parse_obj)
-  document.getElementById("example").innerHTML +="</table>";
-}
-client.send();
 
-
-
- gen_value
+document.getElementById("example").innerHTML = gen_value
