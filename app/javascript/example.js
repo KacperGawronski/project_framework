@@ -17,8 +17,7 @@ function gen_value(){
 	  contentTEXT +="</table>";
 	}
 	client.send();
-	return contentTEXT;
+	document.getElementById("example").innerHTML = contentTEXT;
 }
 
-
-document.getElementById("example").innerHTML = gen_value
+gen_value();
