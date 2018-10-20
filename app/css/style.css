@@ -8,15 +8,16 @@
 	font-family: monospace sans-seriff;
 	text-decoration:none;
 }
+.banner_header a{
+	text-decoration:none;
+}
 #main{
 	width:74%;
 	padding:1%;
-	display:inline-block;
 	margin-left:26%;
 }
 menu{
 	position:relative;
-	display:inline-block;
 	width:25%;
 	float:left;
 	background-color: #0f0;
