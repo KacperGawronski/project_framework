@@ -12,7 +12,7 @@ function get_value(){
 		}	
 		var responseArray = JSON.parse(client.responseText);
 		for (k in responseArray[0]){
-			contentTEXT+="<td><form action=\"javascript:void(0);\" onsubmit=\"return get_value()\" id=\""+k+"\">"+k+"</br><input class=\"QUERY\" id=\"search"+k+"\"></form></td>"
+			contentTEXT+="<td><form action=\"javascript:get_value();\" onsubmit=\"return get_value()\" id=\""+k+"\">"+k+"</br><input class=\"QUERY\" id=\"search"+k+"\"></form></td>"
 		}
 		contentTEXT += "</tr>"
 		responseArray.forEach(parse_obj);
