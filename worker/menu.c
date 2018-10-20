@@ -39,8 +39,7 @@ static void make_tree(lua_State *L, char *path,int *strings_amount){
 						strncpy(cur_name,entry->d_name,strlen(entry->d_name)-4);
 						cur_name[strlen(entry->d_name)-4]='\0';
 						snprintf(cur_item,255,"<li class=\"menu_button\"><a class=\"menu_link\" href=\"page?%s\">%s</a></li>",cur_name,cur_name);
-						++(*strings_amount);
-						lua_pushnumber(L,strings_amount);
+						lua_pushnumber(L,++(*strings_amount));
 						lua_pushstring(L,cur_item);
 						lua_settable(L,-3);
 					}
