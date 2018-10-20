@@ -3,7 +3,7 @@
 function get_val_from_request(){
 	var query="/api.json?limit=100";
 	function append_q(val){
-		if(val.value){query+="&"+val.id.value+val.value;}
+		if(val.value){query+="&"+val+val.value;}
 	}
 	var query_parts=document.getElementsByClassName("QUERY");
 	for(i=0;i<query_parts.length;i++){
