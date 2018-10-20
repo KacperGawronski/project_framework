@@ -28,6 +28,7 @@ https://www.gnu.org/licenses/
 #include <stdio.h>
 
 #include "mariadb_connector.h"
+#include "menu.h"
 
 #include <lua5.3/lua.h>
 #include <lua5.3/lualib.h>
@@ -52,6 +53,8 @@ void *worker(void *arg){
 		/*initializing database connection function*/
 		lua_pushcfunction(L,mariadb_execute_select);
 		lua_setglobal(L,"mariadb_execute_select");
+		lua_pushcfunction(L,generate_menu);
+		lua_setglobal(L,"generate_menu");
 		lua_pushnil(L);
 		/*loading app*/
 		tmp_s=luaL_dofile(L,"app/GET.lua");
