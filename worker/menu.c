@@ -35,11 +35,11 @@ static void make_tree(lua_State *L, char *path){
 
 int generate_menu(lua_State *L){
 	lua_newtable(L)
-	lua_pushstring(L,"<menu class=\"main_menu\"><ul class=\"menu_list\">")
+	lua_pushstring(L,"<menu class=\"main_menu\"><ul class=\"menu_list\">");
 	++strings_amount;
 	lua_setfield(L,-2,strings_amount);
 	make_tree(L,"./pages");
-	lua_pushstring(L,"</menu></ul>")
+	lua_pushstring(L,"</menu></ul>");
 	++strings_amount;
 	lua_setfield(L,-2,strings_amount);
 	
