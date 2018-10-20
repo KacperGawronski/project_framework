@@ -37,12 +37,12 @@ static void make_tree(lua_State *L, char *path){
 int generate_menu(lua_State *L){
 	lua_newtable(L);
 	++strings_amount;
-	lua_pushnubmer(L,strings_amount);
+	lua_pushnumber(L,strings_amount);
 	lua_pushstring(L,"<menu class=\"main_menu\"><ul class=\"menu_list\">");
 	lua_settable(L,-3);
 	make_tree(L,"./pages");
 	++strings_amount;
-	lua_pushnubmer(L,strings_amount);
+	lua_pushnumber(L,strings_amount);
 	lua_pushstring(L,"</menu></ul>");
 	lua_settable(L,-3);
 	
