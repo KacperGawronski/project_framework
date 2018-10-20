@@ -16,6 +16,7 @@
 	width:74%;
 	padding:1%;
 	margin-left:25%;
+	background-color: #fff;
 }
 menu{
 	position:relative;
@@ -45,5 +46,5 @@ menu ul li a{
 
 
 body{
-	background-color: #eef;
+	background-color: #020;
 }
