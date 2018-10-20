@@ -1,7 +1,12 @@
-div #banner{
+#banner{
 	width:100%;
 	display:block;
+	padding: 3%;
 	background-color: #aaffaa;
 	text-align:center;
 	text-decoration:none;
+}
+
+menu{
+	background-color: #aaffaa;
 }
