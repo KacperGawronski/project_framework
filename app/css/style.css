@@ -26,8 +26,9 @@ menu{
 }
 menu ul{
 	display:block;
-	background-color: #0e0;
+	background-color: #060;
 	padding:1px;
+	height:100%;
 }
 
 menu ul li{
@@ -35,6 +36,7 @@ menu ul li{
 	background-color: #060;
 	padding:2px;
 	text-align:center;
+	box-shadow: #ff0 5px 5px;
 }
 menu ul li a{
 	text-decoration:none;
