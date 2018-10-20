@@ -10,7 +10,7 @@ function get_val_from_request(){
 	var client = new XMLHttpRequest();
 	client.open('GET', query);
 	client.onreadystatechange = function() {		
-		var contentTEXT = "<table><tr id=\"table_header\">"
+		var contentTEXT = "<table style=\"display:block;\"><tr id=\"table_header\">"
 		function parse_obj(Obj){
 			contentTEXT +="<tr>"
 			for(k in Obj){
