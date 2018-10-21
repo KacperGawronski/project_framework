@@ -47,7 +47,10 @@ To run example project it is also required to have MariaDB installed,
 with example database from:\newline
 https://github.com/datacharmer/test\_db\newline
 installation process can be found on:\newline
-https://www.ibm.com/developerworks/library/l-lpic1-105-3/index.html
+https://www.ibm.com/developerworks/library/l-lpic1-105-3/index.html\newline
+then add user exampleuser:\newline
+CRATE USER 'exampleuser'@'localhost' IDENTIFIED BY '123';\newline
+GRANT SELECT ON employees.* TO 'exampleuser'@'localhost';
 \newpage
 \section{Structure}
 \subsection{webserver.c}
