@@ -48,14 +48,19 @@ Example functions are placed in menu.c and mariadb_connector.c files.
 ## Page structure
 ### Example page
   is described in following files:  
-    example.lua - placed in app/pages directory.  
+#### example.lua
+placed in app/pages directory.  
 File contains page description - header definitions, javascript files to  
 use and body  
-	  example.js - placed in app/javascript directory.  
+#### example.js 
+placed in app/javascript directory.  
 File contains javascript which is run on page load.  
-    style.css - global css file placed in app/css directory.  
-	  api.lua - file describing json api, as for api.json?[smth] requests.  
-	  page_template.lua - file placed in app directory. It is used  
+#### style.css
+global css file placed in app/css directory.  
+#### api.lua
+file describing json api, as for api.json?[smth] requests.  
+#### page_template.lua 
+file placed in app directory. It is used  
 for processing every lua file in app/pages directory.   
 It contains page structure definition.  
 ### Generally
