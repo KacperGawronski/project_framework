@@ -31,7 +31,7 @@ local function f()
 			coroutine.yield("You can find them on github:</br>\
 <a href=\"https://github.com/KacperGawronski/Lua_Webserver\">Lua_Webserver</a></br>\
 <a href=\"https://github.com/KacperGawronski/example_Lua_app\">example_Lua_app</a></br>")
-			coroutine.yield("Both are licensed under GNU General Public License v3\
+			coroutine.yield("Both are licensed under GNU General Public License v3</br>\
 			Project Framework, also licensed on GNU GPL v3, can be found on:</br>\
 			<a href=\"https://github.com/KacperGawronski/project_framework\">https://github.com/KacperGawronski/project_framework</a></div>")
 		end
