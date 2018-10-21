@@ -1,7 +1,11 @@
 
 
 function get_val_from_request(){
-	var query="/api.json?limit=100";
+	var query="/api.json?";
+	l=document.getElementById("limit").value
+	if(l){
+		query+="limit="+l
+	}
 	function append_q(val){
 		if(val.value){query+="&"+val.attributes[0].value+val.value;}
 	}
