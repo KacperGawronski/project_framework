@@ -27,7 +27,11 @@ local function f()
 	page_structure.script="<script src=\"example.js\"></script>"
 	page_structure.body=function ()
 		local function f()
-			coroutine.yield("<div id=\"main\"><form action=\"javascript:get_val_from_request()\">Limit</br><input id=\"limit\"></input></form><div id=\"example\"></div></div>")
+			coroutine.yield("<div id=\"main\">\
+<form action=\"javascript:get_val_from_request()\">\
+Limit</br><input id=\"limit\">\
+</input></form>\
+<div id=\"example\"></div></div>")
 		end
 		return coroutine.wrap(function () f() end)
 	end

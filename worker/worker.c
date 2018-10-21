@@ -54,10 +54,8 @@ void *worker(void *arg){
 		lua_pushcfunction(L,mariadb_execute_select);
 		lua_setglobal(L,"mariadb_execute_select");
 		
-		/*implemented bug here*/
 		lua_pushcfunction(L,generate_menu);
 		lua_setglobal(L,"generate_menu");
-		/*end of bug*/
 		
 		lua_pushnil(L);
 		/*loading app*/
