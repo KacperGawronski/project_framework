@@ -57,9 +57,8 @@ GRANT SELECT ON employees.* TO 'exampleuser'@'localhost';
 webserver.c contains code that allow handling connections.
 It makes listening socket (by default on port 9090), and forwards
 accepted connections to threads based on worker function. It passes
-struct stack\_element, taken from initialized stack, containing all
-required data to process connection. When connection is done, structure
-is pushed back on the stack by thread for further use.\\
+struct worker\_arg containing all
+required data to process connection.\\
 By default, threre is limitation 100 for number of threads, it's
 controlled by semaphore.
 \subsection{worker.c}
@@ -117,7 +116,7 @@ It won't automatically include js for every page, it needs to be definied
 in page file.
 		\item{app/css} directory contains css files, and description of
 files included in every page in requires.txt.
-		\item{json.api} contains file api.lua, which is called on GET
+		\item{json\_api} contains file api.lua, which is called on GET
 /api.json?[smth] request. It is example of additional aplication.
 	\end{itemize}
 

@@ -28,9 +28,7 @@ GRANT SELECT ON employees.* TO 'exampleuser'@'localhost';
 webserver.c contains code that allow handling connections.  
 It makes listening socket (by default on port 9090), and forwards  
 accepted connections to threads based on worker function. It passes  
-struct stack_element, taken from initialized stack, containing all  
-required data to process connection. When connection is done, structure  
-is pushed back on the stack by thread for further use.  
+struct worker_arg.    
 By default, threre is limitation 100 for number of threads, it's  
 controlled by semaphore.  
 ## worker.c

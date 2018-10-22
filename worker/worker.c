@@ -30,6 +30,8 @@ https://www.gnu.org/licenses/
 #include "mariadb_connector.h"
 #include "menu.h"
 
+#include "worker_arg.h"
+
 #include <lua5.3/lua.h>
 #include <lua5.3/lualib.h>
 #include <lua5.3/lauxlib.h>
@@ -42,44 +44,45 @@ void *worker(void *arg){
 	char buffer[HTTP_REQUEST_SIZE];
 	int n,i;
 	int tmp_s;
-	
+	struct worker_arg *current_arg;
 	const char *response;
 	
-		lua_State *L;
-		/*STARTING Lua interpreter*/
-		L=luaL_newstate();
-		luaL_openlibs(L);
-		
-		/*initializing database connection function*/
-		lua_pushcfunction(L,mariadb_execute_select);
-		lua_setglobal(L,"mariadb_execute_select");
-		
-		lua_pushcfunction(L,generate_menu);
-		lua_setglobal(L,"generate_menu");
-		
-		lua_pushnil(L);
-		/*loading app*/
-		tmp_s=luaL_dofile(L,"app/GET.lua");
-		if(tmp_s){perror("Error loading script:");}
-
+	current_arg==(struct worker_arg *)arg;
 	memset(buffer,HTTP_REQUEST_SIZE,sizeof(char));
 	buffer[HTTP_REQUEST_SIZE-1]='\0';
-	n=recv(((struct stack_element *)arg)->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
-		if(n>3&&!strncmp(buffer,"GET",3)){
+	n=recv(current_arg->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
+		if(n>3&&!strncmp(buffer,"GET",3)){				
+			lua_State *L;
+			/*STARTING Lua interpreter*/
+			L=luaL_newstate();
+			luaL_openlibs(L);
+			
+			/*initializing database connection function*/
+			lua_pushcfunction(L,mariadb_execute_select);
+			lua_setglobal(L,"mariadb_execute_select");
+			
+			lua_pushcfunction(L,generate_menu);
+			lua_setglobal(L,"generate_menu");
+			
+			lua_pushnil(L);
+			/*loading app*/
+			tmp_s=luaL_dofile(L,"app/GET.lua");
+			if(tmp_s){perror("Error loading script:");}
+
 			lua_getglobal(L,"process_request");
 			lua_pushstring(L,buffer);
 			lua_call(L,1,1);
 			lua_setglobal(L,"current_state_function");
 			while(lua_getglobal(L,"current_state_function")&&(!lua_isnil(L,-1))&&LUA_YIELD==lua_resume(L,NULL,0)){
 				response=lua_tostring(L,-1);
-				send(((struct stack_element *)arg)->s,response,strlen(response),MSG_DONTWAIT);
+				send(current_arg->s,response,strlen(response),MSG_DONTWAIT);
 				lua_pop(L,1);
 			}
 		}
 		
 	lua_close(L);
-	close(((struct stack_element*)arg)->s);
-	stack_push((struct stack_element *)arg);
+	close(current_arg->s);
+	free(current_arg);
 	sem_post(&counter_sem);
 	return NULL;
 }

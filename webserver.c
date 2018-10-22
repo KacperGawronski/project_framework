@@ -1,4 +1,5 @@
 /*
+/*
 Author: Kacper Gawroński
 
 This file is part of Project Framework.
@@ -27,8 +28,8 @@ https://www.gnu.org/licenses/
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "worker/stack.h"
 #include "worker/worker.h"
+#include "worker/worker_arg.h"
 #include <signal.h>
 
 #include <lua5.3/lua.h>
@@ -39,44 +40,26 @@ https://www.gnu.org/licenses/
 static int s;
 
 void SIG_handler(int sig){
-	struct stack_element *tmp1,*tmp2;
-	tmp2=stack_pop();
-	while(tmp1=tmp2){
-		tmp2=stack_pop();
-		free(tmp1);
-	}
 	close(s);
+	exit(0);
 }
 
 
 #define MAX_THREADS_NUMBER 100
 
 sem_t counter_sem;
-pthread_mutex_t mut = PTHREAD_MUTEX_INITIALIZER;
 
 int main(void){
 	struct addrinfo hints;
 	struct addrinfo *result,*rp;
 	struct sockaddr tmp_sockaddr;
-	struct stack_element *tmp;
+	struct worker_arg *tmp;
 	socklen_t sockaddr_len;
-	int tmp_s;
 
 
 	/*signals*/
 	signal(SIGTERM,SIG_handler);
 	signal(SIGINT,SIG_handler);
-	signal(SIGKILL,SIG_handler);
-
-
-
-
-	for(s=0;s<MAX_THREADS_NUMBER;++s){
-		tmp=malloc(sizeof(*tmp));
-		tmp->s=0;		
-		stack_push(tmp);
-	
-	}
 
 
 	memset(&hints,0,sizeof(hints));
@@ -111,11 +94,10 @@ int main(void){
 	sockaddr_len=sizeof(tmp_sockaddr);
 	while(1){
 		memset(&tmp_sockaddr,0,sockaddr_len);
-		if((tmp_s=accept(s,&tmp_sockaddr,&sockaddr_len))<0)return 4;
-		tmp=stack_pop();
-		tmp->s=tmp_s;
+		tmp=malloc(sizeof(worker_args));
+		if((tmp->s=accept(s,&tmp_sockaddr,&sockaddr_len))<0)return 4;
 		sem_wait(&counter_sem);
-		
 		pthread_create(&(tmp->thread_id),NULL,worker,tmp);
 	}
+	return 0;
 }
