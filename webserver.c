@@ -101,6 +101,7 @@ int main(void){
 		if((tmp->s=accept(s,&tmp_sockaddr,&sockaddr_len))<0)return 4;
 		sem_wait(&counter_sem);
 		pthread_create(&threads_array[++i%MAX_THREADS_NUMBER],NULL,worker,tmp);
+		tmp=NULL;
 	}
 	return 0;
 }
