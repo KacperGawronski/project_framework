@@ -82,7 +82,7 @@ void *worker(void *arg){
 		
 	lua_close(L);
 	close(current_arg->s);
-	free(current_arg);
+	free(arg);
 	sem_post(&counter_sem);
 	return NULL;
 }
