@@ -3,6 +3,6 @@
 
 struct worker_arg{
 	int s;
-}
+};
 
 #endif

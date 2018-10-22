@@ -25,6 +25,7 @@ https://www.gnu.org/licenses/
 #include <semaphore.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "mariadb_connector.h"
 #include "menu.h"
@@ -45,13 +46,13 @@ void *worker(void *arg){
 	int tmp_s;
 	struct worker_arg *current_arg;
 	const char *response;
-	
+	lua_State *L;
+
 	current_arg==(struct worker_arg *)arg;
 	memset(buffer,HTTP_REQUEST_SIZE,sizeof(char));
 	buffer[HTTP_REQUEST_SIZE-1]='\0';
 	n=recv(current_arg->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
-		if(n>3&&!strncmp(buffer,"GET",3)){				
-			lua_State *L;
+		if(n>3&&!strncmp(buffer,"GET",3)){	
 			/*STARTING Lua interpreter*/
 			L=luaL_newstate();
 			luaL_openlibs(L);
