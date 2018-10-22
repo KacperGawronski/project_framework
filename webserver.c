@@ -100,7 +100,7 @@ int main(void){
 		if(tmp==NULL){perror("Malloc:"); return 6;}
 		if((tmp->s=accept(s,&tmp_sockaddr,&sockaddr_len))<0)return 4;
 		sem_wait(&counter_sem);
-		pthread_create(&threads_array[i=((++i%MAX_THREADS_NUMBER)],NULL,worker,tmp);
+		pthread_create(&threads_array[i=(i+1)%MAX_THREADS_NUMBER],NULL,worker,tmp);
 		tmp=NULL;
 	}
 	return 0;
