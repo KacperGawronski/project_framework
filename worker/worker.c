@@ -22,7 +22,6 @@ https://www.gnu.org/licenses/
 #include <pthread.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include "stack.h"
 #include <semaphore.h>
 #include <string.h>
 #include <stdio.h>
