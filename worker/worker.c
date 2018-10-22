@@ -77,9 +77,9 @@ void *worker(void *arg){
 				send(current_arg->s,response,strlen(response),MSG_DONTWAIT);
 				lua_pop(L,1);
 			}
+			lua_close(L);
 		}
 		
-	lua_close(L);
 	close(current_arg->s);
 	free(arg);
 	sem_post(&counter_sem);
