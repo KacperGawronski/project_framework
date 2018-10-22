@@ -94,11 +94,13 @@ int main(void){
 	
 	sockaddr_len=sizeof(tmp_sockaddr);
 	i=0;
+	perror("Checkpoint 1");
 	while(1){
 		memset(&tmp_sockaddr,0,sockaddr_len);
 		tmp=malloc(sizeof(*tmp));
 		if(tmp==NULL){perror("Malloc:"); return 6;}
 		if((tmp->s=accept(s,&tmp_sockaddr,&sockaddr_len))<0)return 4;
+		perror("Checkpoint 2");
 		sem_wait(&counter_sem);
 		pthread_create(&threads_array[++i%MAX_THREADS_NUMBER],NULL,worker,tmp);
 	}
