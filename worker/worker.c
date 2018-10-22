@@ -47,7 +47,6 @@ void *worker(void *arg){
 	struct worker_arg *current_arg;
 	const char *response;
 	lua_State *L;
-	perror("Checkpoint 3");
 	current_arg=(struct worker_arg *)arg;
 	memset(buffer,HTTP_REQUEST_SIZE,sizeof(char));
 	buffer[HTTP_REQUEST_SIZE-1]='\0';
@@ -66,7 +65,6 @@ void *worker(void *arg){
 			
 			lua_pushnil(L);
 			/*loading app*/
-			perror("Checkpoint 4");
 			tmp_s=luaL_dofile(L,"app/GET.lua");
 			if(tmp_s){perror("Error loading script:");}
 
