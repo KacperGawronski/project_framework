@@ -48,7 +48,7 @@ void *worker(void *arg){
 	const char *response;
 	lua_State *L;
 	perror("Checkpoint 3");
-	current_arg==(struct worker_arg *)arg;
+	current_arg=(struct worker_arg *)arg;
 	memset(buffer,HTTP_REQUEST_SIZE,sizeof(char));
 	buffer[HTTP_REQUEST_SIZE-1]='\0';
 	n=recv(current_arg->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
