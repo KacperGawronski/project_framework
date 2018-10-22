@@ -55,7 +55,8 @@ int main(void){
 	struct sockaddr tmp_sockaddr;
 	struct worker_arg *tmp;
 	socklen_t sockaddr_len;
-
+	int i;
+	pthread_t threads_array[MAX_THREADS_NUMBER];
 
 	/*signals*/
 	signal(SIGTERM,SIG_handler);
@@ -92,12 +93,13 @@ int main(void){
 	
 	
 	sockaddr_len=sizeof(tmp_sockaddr);
+	i=0;
 	while(1){
 		memset(&tmp_sockaddr,0,sockaddr_len);
 		tmp=malloc(sizeof(worker_args));
 		if((tmp->s=accept(s,&tmp_sockaddr,&sockaddr_len))<0)return 4;
 		sem_wait(&counter_sem);
-		pthread_create(&(tmp->thread_id),NULL,worker,tmp);
+		pthread_create(&threads_array[++i%MAX_THREADS_NUMBER],NULL,worker,tmp);
 	}
 	return 0;
 }
