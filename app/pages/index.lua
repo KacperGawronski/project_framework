@@ -26,7 +26,7 @@ local function f(cookies)
 	page_structure.title="Example index for framework"
 	page_structure.script=""
 	page_structure.body=function ()
-		local function f()
+		local function g()
 			coroutine.yield("<div id=\"main\"><h2>Welcome to open example Project Framework based on Lua_WebServer and Example Lua App</h2></br>")
 			coroutine.yield("You can find them on github:</br>\
 <a href=\"https://github.com/KacperGawronski/Lua_Webserver\">Lua_Webserver</a></br>\
@@ -35,7 +35,7 @@ local function f(cookies)
 			Project Framework, also licensed on GNU GPL v3, can be found on:</br>\
 			<a href=\"https://github.com/KacperGawronski/project_framework\">https://github.com/KacperGawronski/project_framework</a></div>")
 		end
-		return coroutine.wrap(function () f() end)
+		return coroutine.wrap(function () g() end)
 	end
 	
 	for txt in process_template(page_structure) do

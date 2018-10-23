@@ -26,14 +26,14 @@ local function f(cookies)
 	page_structure.title="Example use of json api."
 	page_structure.script="<script src=\"example.js\"></script>"
 	page_structure.body=function ()
-		local function f()
+		local function g()
 			coroutine.yield("<div id=\"main\">\
 <form action=\"javascript:get_val_from_request()\">\
 Limit</br><input id=\"limit\">\
 </input></form>\
 <div id=\"example\"></div></div>")
 		end
-		return coroutine.wrap(function () f() end)
+		return coroutine.wrap(function () g() end)
 	end
 	
 	for txt in process_template(page_structure) do
