@@ -32,7 +32,7 @@ local function f(cookies)
 	page_structure.cookies={}
 	page_structure.body=function ()
 		local function g()
-			coroutine.yield("<div id=\"main\"></div>")
+			coroutine.yield("<div id=\"main\"><div id=\"login\">Loading script.</div></div>")
 		end
 		return coroutine.wrap(function () g() end)
 	end
