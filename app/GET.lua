@@ -21,7 +21,7 @@ https://www.gnu.org/licenses/
 
 dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
-
+dofile("app/get_cookies.lua")
 function process_request(http_request)
 	
 	local GET_value,n=string.gsub(http_request,"GET (.+) HTTP/1%.1.*","%1")
