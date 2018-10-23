@@ -1,2 +1,2 @@
-document.getElementById("main").innerHTML = "Hello World"
+document.getElementById("main").innerHTML = "<form id=\"auth_form\">Login:   </form"
 

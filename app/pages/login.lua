@@ -30,7 +30,6 @@ local function f(cookies)
 			page_structure.script="<script src=\"logged.js\"></script>"
 	end
 	page_structure.cookies={}
-	
 	page_structure.body=function ()
 		local function g()
 			coroutine.yield("<div id=\"main\"></div>")

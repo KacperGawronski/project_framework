@@ -1,1 +1,2 @@
 <link rel="Stylesheet" type="text/css" href="/style.css" />
+<link rel="Stylesheet" type="text/css" href="/auth.css" />
