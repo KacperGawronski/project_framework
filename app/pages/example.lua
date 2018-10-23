@@ -20,7 +20,7 @@ https://www.gnu.org/licenses/
 
 
 
-local function f()
+local function f(cookies)
 	local process_template=dofile("app/page_template.lua")
 	local page_structure={}
 	page_structure.title="Example use of json api."
@@ -41,4 +41,4 @@ Limit</br><input id=\"limit\">\
 	end
 end
 
-return coroutine.wrap(function () f() end)
+return function (args) coroutine.wrap(function () f(args) end) end
