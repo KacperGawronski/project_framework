@@ -21,7 +21,6 @@ https://www.gnu.org/licenses/
 
 dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
-get_cookies=dofile("app/get_cookies.lua")
 function process_request(http_request)
 	
 	local GET_value,n=string.gsub(http_request,"GET (.+) HTTP/1%.1.*","%1")
@@ -31,6 +30,7 @@ function process_request(http_request)
 	
 	options.g["/"]=function ()
 		local f=dofile("app/pages/index.lua")
+		local get_cookies=dofile("app/get_cookies.lua")
 		if f then for s in f(get_cookies(http_request)) do
 			coroutine.yield(s)
 		end end	
@@ -39,6 +39,7 @@ function process_request(http_request)
 	options.g.page= function()
 		local s,n=string.gsub(GET_value,"/page%?(.+)","%1",)
 		if n>0 then
+			local get_cookies=dofile("app/get_cookies.lua")
 			local f=dofile("app/pages/"..s..".lua")
 			if f then for s in f(get_cookies(http_request)) do
 				coroutine.yield(s)
