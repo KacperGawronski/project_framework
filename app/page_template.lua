@@ -23,8 +23,7 @@ dofile("app/head.lua")
 local function f(t)
 	
 	local default_banner="<div id=\"banner\"><h1 class=\"banner_header\"><a href=\"page?index\">Project Framework</a></h1></div>"
-	coroutine.yield("HTTP/1.1 200 OK\r\n")
-	
+	coroutine.yield("HTTP/1.1 200 OK\r")
 	coroutine.yield("Content-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n")
 	coroutine.yield("<!DOCTYPE html>\
 <html>")
