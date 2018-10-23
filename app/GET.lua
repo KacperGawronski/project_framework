@@ -31,7 +31,7 @@ function process_request(http_request)
 	options.g["/"]=function ()
 		local get_cookies=dofile("app/get_cookies.lua")
 		local f=dofile("app/pages/index.lua")
-		if f then for s in f(get_cookies(http_request)) do
+		if f then for s in f() do
 			coroutine.yield(s)
 		end end	
 	end
