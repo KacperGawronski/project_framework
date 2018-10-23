@@ -1,1 +1,3 @@
-document.getElementById("main").innerHTML = "Hello World"
+client.onreadystatechange = function(){
+	document.getElementById("main").innerHTML = "Hello World"
+}
