@@ -43,4 +43,4 @@ local function f(cookies)
 	end
 end
 
-return function(args) coroutine.wrap(function () f(args) end) end
+return function(args) return coroutine.wrap(function () f(args) end) end

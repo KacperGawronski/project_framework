@@ -41,4 +41,4 @@ Limit</br><input id=\"limit\">\
 	end
 end
 
-return function (args) coroutine.wrap(function () f(args) end) end
+return function (args) return coroutine.wrap(function () f(args) end) end
