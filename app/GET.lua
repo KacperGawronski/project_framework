@@ -29,15 +29,15 @@ function process_request(http_request)
 	options.g={}
 	
 	options.g["/"]=function ()
-		local f=dofile("app/pages/index.lua")
 		local get_cookies=dofile("app/get_cookies.lua")
+		local f=dofile("app/pages/index.lua")
 		if f then for s in f(get_cookies(http_request)) do
 			coroutine.yield(s)
 		end end	
 	end
 	
 	options.g.page= function()
-		local s,n=string.gsub(GET_value,"/page%?(.+)","%1",)
+		local s,n=string.gsub(GET_value,"/page%?(.+)","%1")
 		if n>0 then
 			local get_cookies=dofile("app/get_cookies.lua")
 			local f=dofile("app/pages/"..s..".lua")
