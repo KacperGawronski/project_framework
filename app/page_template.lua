@@ -24,9 +24,9 @@ local function f(t)
 	
 	local default_banner="<div id=\"banner\"><h1 class=\"banner_header\"><a href=\"page?index\">Project Framework</a></h1></div>"
 	coroutine.yield("HTTP/1.1 200 OK\r\n")
-	for k,v in pairs(t.cookies) do
-		coroutine.yield(string.format("Set-Cookie: %s=%s; HttpOnly",k,v)
-	end
+	if t.cookies then for k,v in pairs(t.cookies) do
+		coroutine.yield(string.format("Set-Cookie: %s=%s; HttpOnly",k,v))
+	end end
 	coroutine.yield("Content-Type: text/html; charset=UTF-8\r\nConnection: close\r\n\r\n")
 	coroutine.yield("<!DOCTYPE html>\
 <html>")
