@@ -1,7 +1,7 @@
 
 function SELECT(s)
 	local t={}
-	local limit=1000
+	local limit=100000
 	local data_table="employees"
 	local fields="*"
 	s=string.gsub(s,"'","''"):gsub("%%3E",">"):gsub("%%3C","<")
