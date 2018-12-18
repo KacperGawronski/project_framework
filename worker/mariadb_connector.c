@@ -34,6 +34,7 @@ int mariadb_execute_select(int s,const char *SELECT){
 	const char *str;
 	int i,first=0;
 	int n_fields;
+	const char response_header[]="HTTP/1.1 200 OK\n\rContent-Type: application/vnd.api+json\n\rConnection: close\n\r\n\r[";
 	char buffer[1500];
 	conn=mysql_init(NULL);
 	if(!mysql_real_connect(conn,HOST,USER,PASS,DATABASE,PORT,SOCKET,OPTIONS)){
@@ -47,9 +48,7 @@ int mariadb_execute_select(int s,const char *SELECT){
 	if(res==NULL)return 0;
 	n_fields=mysql_num_fields(res);
 	field_names=mysql_fetch_fields(res);
-	send(s,
-	"HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nConnection: close()\r\n\r\n[",
-	strlen("HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nConnection: close()\r\n\r\n["),0);	
+	send(s,response_header,strlen(response_header),0);	
 	while((row=mysql_fetch_row(res))){
 		json_row=json_object();
 		if(first++){send(s,",{",strlen(",{"),0);}else{send(s,"{",strlen("{"),0);}

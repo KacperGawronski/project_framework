@@ -9,7 +9,7 @@ function SELECT(s)
 		if k=="limit" then
 			local tmp
 			tmp=tonumber(v)
-			if tmp<1000 then limit=tmp else limit=1000 end
+			if tmp<100000 then limit=tmp else limit=1000000 end
 		elseif k=="data_table" then
 			data_table=v
 		elseif k=="fields" then

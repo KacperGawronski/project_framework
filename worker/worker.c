@@ -60,6 +60,7 @@ void *worker(void *arg){
 				lua_pushstring(L,buffer);
 				lua_call(L,1,1);
 				mariadb_execute_select(current_arg->s,lua_tostring(L,-1));
+				lua_close(L);
 			}else{
 			
 			/*STARTING Lua interpreter*/

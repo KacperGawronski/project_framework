@@ -48,25 +48,6 @@ function process_request(http_request)
 		end
 	end
 	
-	options.g["api.json"]=function()	
-		local s,n=string.gsub(GET_value,"/api%.json%?(.+)","%1")
-		if n>0 then
-			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nConnection: close\r\n\r\n")
-			dofile("app/json_api/api.lua")
-			--local tmp=mariadb_execute_select(SELECT(s))
-			local arg= SELECT(s)
-
-			local tmp=coroutine.wrap(function () return mariadb_execute_select(arg) end)
-			print(type(tmp))
-			for i in tmp do
-				print(type(i))
-				coroutine.yield(i)
-			end
-			
-
-		end
-	end
-	
 	options.g["js"]=function ()
 		local s,n=string.gsub(GET_value,"/(.+)%.js","app/javascript/%1.js")
 		if n>0 then
