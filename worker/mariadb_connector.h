@@ -18,6 +18,6 @@
 	#define OPTIONS 0
 #endif
 
-int mariadb_execute_select(lua_State *L);
+int mariadb_execute_select(int s, const char *SELECT);
 
 #endif

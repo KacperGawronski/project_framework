@@ -52,14 +52,25 @@ void *worker(void *arg){
 	buffer[HTTP_REQUEST_SIZE-1]='\0';
 	n=recv(current_arg->s,buffer,HTTP_REQUEST_SIZE-1,MSG_DONTWAIT);
 		if(n>3&&!strncmp(buffer,"GET",3)){	
+			if(!strncmp(buffer,"GET /api.json",13)){
+				L=luaL_newstate();
+				luaL_openlibs(L);
+				luaL_dofile(L,"app/json_api/api.lua");
+				lua_getglobal(L,"SELECT");
+				lua_pushstring(L,buffer);
+				lua_call(L,1,1);
+				mariadb_execute_select(current_arg->s,lua_tostring(L,-1));
+			}else{
+			
 			/*STARTING Lua interpreter*/
 			L=luaL_newstate();
 			luaL_openlibs(L);
 			
-			/*initializing database connection function*/
+			/*initializing database connection function
 			lua_pushcfunction(L,mariadb_execute_select);
 			lua_setglobal(L,"mariadb_execute_select");
-			
+			*/
+
 			lua_pushcfunction(L,generate_menu);
 			lua_setglobal(L,"generate_menu");
 			
@@ -74,10 +85,11 @@ void *worker(void *arg){
 			lua_setglobal(L,"current_state_function");
 			while(lua_getglobal(L,"current_state_function")&&(!lua_isnil(L,-1))&&LUA_YIELD==lua_resume(L,NULL,0)){
 				response=lua_tostring(L,-1);
-				send(current_arg->s,response,strlen(response),MSG_DONTWAIT);
+				send(current_arg->s,response,strlen(response),0);
 				lua_pop(L,1);
 			}
 			lua_close(L);
+			}
 		}
 		
 	close(current_arg->s);

@@ -21,6 +21,7 @@ https://www.gnu.org/licenses/
 
 dofile("app/javascript/js.lua")
 dofile("app/css/css.lua")
+
 function process_request(http_request)
 	
 	local GET_value,n=string.gsub(http_request,"GET (.+) HTTP/1%.1.*","%1")
@@ -52,8 +53,17 @@ function process_request(http_request)
 		if n>0 then
 			coroutine.yield("HTTP/1.1 200 OK\r\nContent-Type: application/json; charset=UTF-8\r\nConnection: close\r\n\r\n")
 			dofile("app/json_api/api.lua")
-			local tmp=mariadb_execute_select(SELECT(s))
-			if tmp then coroutine.yield(tmp) end
+			--local tmp=mariadb_execute_select(SELECT(s))
+			local arg= SELECT(s)
+
+			local tmp=coroutine.wrap(function () return mariadb_execute_select(arg) end)
+			print(type(tmp))
+			for i in tmp do
+				print(type(i))
+				coroutine.yield(i)
+			end
+			
+
 		end
 	end
 	
